@@ -1,0 +1,35 @@
+body {
+  font-family: Arial;
+  font-size: 14px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.cart-header {
+  background-color: #017ca7;
+  color: white;
+}
+
+.bg-custom {
+  background-color: #e66d5d;
+}
+
+.nav-link {
+  color: black;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.icons {
+  font-size: 40px; /* Adjust the size of the icons as needed */
+  width: 15%; /* Adjust icon width as needed */
+  height: 30px; /* Adjust icon height as needed */
+  color: white;
+  text-decoration: none; 
+}
