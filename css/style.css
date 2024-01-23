@@ -30,6 +30,13 @@ body {
   font-size: 40px; /* Adjust the size of the icons as needed */
   width: 15%; /* Adjust icon width as needed */
   height: 30px; /* Adjust icon height as needed */
-  color: white;
+  color: black;
   text-decoration: none; 
+}
+
+.submitbutton {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding: 0.3% 1.2% 0.3% 1.2%;
 }

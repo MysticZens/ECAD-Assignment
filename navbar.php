@@ -11,7 +11,7 @@ if(isset($_SESSION["ShopperName"])) {
 	//To Do 1 (Practical 2) -
     //Display a greeting message, Change Password and logout links 
     //after shopper has logged in.
-    $content1 = "Welcome to Giftown Singapore! (<b>$_SESSION[ShopperName]</b>)<br />";
+    $content1 = "Welcome to Giftown Singapore! (<b>$_SESSION[ShopperName]</b>)";
     $content2 = "<li class='nav-item'>
                  <a class='nav-link' href='changePassword.php'>Change Password</a></li> 
                  <li class='nav-item'>

@@ -3,7 +3,7 @@
 $servername = 'localhost';
 $username = 'root';
 $userpwd = '';
-$dbname = 'giftopia'; 
+$dbname = 'giftown'; 
 
 // Create connection
 $conn = new mysqli($servername, $username, $userpwd, $dbname);
