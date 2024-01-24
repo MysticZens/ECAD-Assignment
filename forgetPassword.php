@@ -58,18 +58,25 @@ if (isset($_POST["eMail"])) {
 		// by shopper, i.e $eMail. In this case, use a testing e-mail 
 		// address as the shopper's e-mail address in our database 
 		// may not be a valid account.
-		$to="mamayatestnp@gmail.com"; // use the gmail account created
-		$from="mamayatestnp@gmail.com"; // use the gmail account created
-		$from_name="Mamaya e-BookStore";
-		$subject="Mamaya e-BookStore Login Password"; // e-mail title 
+		$to="giftownsingapore@gmail.com"; // use the gmail account created
+		$from="giftownsingapore@gmail.com"; // use the gmail account created
+		$from_name="Giftown Singapore Online Gift Store";
+		$subject="Giftown Singapore Login Password"; // e-mail title 
 		// HTML body message
-		$body="<span style='color:black; font-size:12px'>
+		$body1="<span style='color:black; font-size:15px'>
 				Your new password is <span style='font-weight:bold'> 
 				$new_pwd</span>.<br />
-				Do change this default password. </span>";
+				Do change this default password in the ecommerce website. </span>";
+		$body2="<span style='color:black; font-size:15px'>
+				Username: <span style='font-weight:bold'> 
+				$eMail</span><br />
+				<span style='color:black; font-size:15px'>
+				Password: <span style='font-weight:bold'> 
+				$new_pwd</span><br />";
 		// Initiate the e-mailing sending process
-		if(smtpmailer ($to, $from, $from_name, $subject, $body)) { 
-			echo "<p>Your new password is sent to:
+		if(smtpmailer($to, $from, $from_name, $subject, $body2)) { 
+			echo $body1;
+			echo "<p>Your new password is also sent to:
 				  <span style='font-weight:bold'>$to</span>.</p>";
 		}
 		else {
