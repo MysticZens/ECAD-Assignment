@@ -43,7 +43,7 @@ if (isset($_POST["eMail"])) {
 		// To Do 1: Update the default new password to shopper"s account
 		$row = $result->fetch_array();
 		$shopperId = $row["ShopperID"];
-		$new_pwd = "password"; // Default password
+		$new_pwd = "giftown"; // Default password
 		$qry = "UPDATE Shopper SET Password=? WHERE ShopperID=?"; 
 		$stmt = $conn->prepare($qry);
 		// "s" - string, "i" - integer
@@ -58,29 +58,30 @@ if (isset($_POST["eMail"])) {
 		// by shopper, i.e $eMail. In this case, use a testing e-mail 
 		// address as the shopper's e-mail address in our database 
 		// may not be a valid account.
-		$to="mamayatestnp@gmail.com"; // use the gmail account created
-		$from="mamayatestnp@gmail.com"; // use the gmail account created
-		$from_name="Mamaya e-BookStore";
-		$subject="Mamaya e-BookStore Login Password"; // e-mail title 
+		$to=$eMail; // use the gmail account that the user has logged in with
+		$from="giftownsingapore@gmail.com"; // use the gmail account created
+		$from_name="Giftown Singapore Online Gift Store";
+		$subject="Giftown Singapore Login Password"; // e-mail title 
 		// HTML body message
-		$body="<span style='color:black; font-size:12px'>
+		$body="<span style='color:black; font-size:15px'>
 				Your new password is <span style='font-weight:bold'> 
 				$new_pwd</span>.<br />
-				Do change this default password. </span>";
+				Do change this default password in the ecommerce website. </span>";
 		// Initiate the e-mailing sending process
-		if(smtpmailer ($to, $from, $from_name, $subject, $body)) { 
-			echo "<p>Your new password is sent to:
+		if(smtpmailer($to, $from, $from_name, $subject, $body)) { 
+			echo "<p>Your new password is also sent to:
 				  <span style='font-weight:bold'>$to</span>.</p>";
 		}
+		
 		else {
 			echo "<p><span style='color:red;'>
-				  Mailer Error: ". $error. "</span></p>";
+				  Mailer Error: Cannot send E-mail Address!</span></p>";
 		}
 		// End of To Do 2
 	}
 	else {
 		echo "<p><span style='color:red;'>
-		      Wrong E-mail address!</span></p>";
+		      Invalid E-mail address!</span></p>";
 	}
 	$conn->close();
 }

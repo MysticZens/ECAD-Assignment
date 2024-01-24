@@ -24,7 +24,7 @@
             <a class="icons" href="https://x.com"><i class="fa-brands fa-x-twitter"></i></a>
         </div> 
         <br />Contact us for more details and issues with the website! Please email to:
-        <a href="mailto:giftownSingapore@np.edu.sg" style="text-decoration: none; color: red">gifttownSingapore@np.edu.sg</a>
+        <a href="mailto:giftownSingapore@np.edu.sg" style="text-decoration: none; color: red">gifttownsingapore@gmail.com</a>
         <p style="font-size:15px; color: black;">&copy; Copyright by Giftown Singapore | All Rights Reserved</p>
      </div>
 </div> <!-- Close the bootstrap container -->

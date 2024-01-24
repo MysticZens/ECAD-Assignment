@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Giftown Singapore</title>
+<title>Giftown Singapore Online Gift Store</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- Link to compiled Bootstrap JavaScript downloaded -->

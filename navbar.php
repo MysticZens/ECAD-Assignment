@@ -13,7 +13,7 @@ if(isset($_SESSION["ShopperName"])) {
     //after shopper has logged in.
     $content1 = "Welcome to Giftown Singapore! (<b>$_SESSION[ShopperName]</b>)";
     $content2 = "<li class='nav-item'>
-                 <a class='nav-link' href='changePassword.php'>Change Password</a></li> 
+                 <a class='nav-link' href='updateProfile.php'>Update Profile</a></li> 
                  <li class='nav-item'>
                  <a class='nav-link' href='logout.php'>Logout</a></li>
                  <li class='nav-item'>
