@@ -19,7 +19,7 @@ include("header.php"); // Include the Page Layout header
                    type="search" />
         </div>
         <div class="col-sm-3">
-            <button type="submit">Search</button>
+            <button class="submitbutton" type="submit">Search</button>
         </div>
     </div>  <!-- End of 2nd row -->
 </form>

@@ -20,34 +20,49 @@ if (empty($_POST["dob"])) {
 // Include the PHP file that establishes database connection handle: $conn 
 include_once("mysql_conn.php");
 
-// Define the INSERT SQL statement
-$qry = "INSERT INTO Shopper (Name, BirthDate, Address, Country, Phone, Email, Password, PwdQuestion, PwdAnswer, ActiveStatus, DateEntered) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)";
-$stmt = $conn->prepare($qry);
-// "ssssssssss" 10 string parameters
-$stmt->bind_param("ssssssssss", $name, $dob, $address, $country, $phone, $email, $password, $pwdQuestion, $pwdAnswer, $formattedDate);
+$checkEmail = true;
+$qry1 = "SELECT Email FROM shopper";
+$result = $conn->query($qry1);
+while ($row = $result->fetch_array()) {
+    if ($row["Email"] == $email) {
+        $checkEmail = false;
+    }
+}
+if ($checkEmail) {
+    // Define the INSERT SQL statement
+    $qry2 = "INSERT INTO Shopper (Name, BirthDate, Address, Country, Phone, Email, Password, PwdQuestion, PwdAnswer, ActiveStatus, DateEntered) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)";
+    $stmt = $conn->prepare($qry2);
+    // "ssssssssss" 10 string parameters
+    $stmt->bind_param("ssssssssss", $name, $dob, $address, $country, $phone, $email, $password, $pwdQuestion, $pwdAnswer, $formattedDate);
 
-if ($stmt->execute()) { // SQL statement executed successfully
-    // Retrieve the Shooper ID assigned to the new shopper
-    $qry = "SELECT LAST_INSERT_ID() AS ShopperID";
-    $result = $conn->query($qry); // Execute the SQL and get the returned result 
-    while ($row = $result->fetch_array()) {
-        $_SESSION["ShopperID"] = $row["ShopperID"];
+    if ($stmt->execute()) { // SQL statement executed successfully
+        // Retrieve the Shooper ID assigned to the new shopper
+        $qry = "SELECT LAST_INSERT_ID() AS ShopperID";
+        $result = $conn->query($qry); // Execute the SQL and get the returned result 
+        while ($row = $result->fetch_array()) {
+            $_SESSION["ShopperID"] = $row["ShopperID"];
+        }
+
+        // Successful message and Shopper ID
+        $Message = "<p style='text-align: center'>Registration successful!<br />
+                    Your Shopper ID is $_SESSION[ShopperID]<p>";
+        // Save the Shopper Name in a session variable
+        $_SESSION["ShopperName"] = $name;
     }
 
-    // Successful message and Shopper ID
-    $Message = "<p style='text-align: center'>Registration successful!<br />
-                Your Shopper ID is $_SESSION[ShopperID]<p>";
-    // Save the Shopper Name in a session variable
-    $_SESSION["ShopperName"] = $name;
+    else { // Error message
+        $Message ="<h3 style='text-align: center; color:red'>Error in inserting record</h3>";
+    }
+
+    // Release the resource allocated for prepared statement
+    $stmt->close();
 }
 
-else { // Error message
-    $Message ="<h3 style='color:red'>Error in inserting record</h3>";
+else {
+    $Message ="<h3 style='color: red; text-align: center'><b>Email Address already exists in the system!</b></h3>";
 }
 
-// Release the resource allocated for prepared statement
-$stmt->close();
 // Close database connection
 $conn->close();
 
