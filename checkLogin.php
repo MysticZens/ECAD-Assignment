@@ -22,15 +22,16 @@ if ($result1->num_rows > 0) {
     $_SESSION["ShopperName"] = $row1["Name"];
     $_SESSION["ShopperID"] = $row1["ShopperID"];
     $shopperId = $_SESSION["ShopperID"];
-    $qry = "SELECT sc.ShopCartID, COUNT(sci.ProductID) AS NumItems FROM ShopCart sc LEFT JOIN ShopCartItem sci 
-    ON sc.ShopCartID=sci.ShopCartID WHERE sc.ShopperID=$shopperId AND sc.OrderPlaced=0";
+    $qry = "SELECT sc.ShopCartID, COUNT(sci.ProductID) AS NumItems FROM ShopCart sc 
+        LEFT JOIN ShopCartItem sci ON sc.ShopCartID = sci.ShopCartID 
+        WHERE sc.ShopperID = $shopperId AND sc.OrderPlaced = 0";
     $stmt = $conn->prepare($qry);
     $stmt->execute();
     $result1 = $stmt->get_result();
-    if ($result->num_rows > 0) {
+    if ($result1->num_rows > 0) {
         $row1 = $result1->fetch_assoc();
-        $_SESSION["Cart"] = $row["ShopCartID"];
-        $_SESSION["NumCartItem"] = $row["NumItems"];
+        $_SESSION["Cart"] = $row1["ShopCartID"]; // Change $row to $row1 here
+        $_SESSION["NumCartItem"] = $row1["NumItems"]; // Change $row to $row1 here
     } else {
         // Handle the case where no records are found
         $_SESSION["Cart"] = null;
