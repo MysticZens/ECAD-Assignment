@@ -68,10 +68,11 @@ if (isset($_POST["eMail"])) {
 				$new_pwd</span>.<br />
 				Do change this default password in the ecommerce website. </span>";
 		// Initiate the e-mailing sending process
-		if(smtpmailer($to, $from, $from_name, $subject, $body2)) { 
+		if(smtpmailer($to, $from, $from_name, $subject, $body)) { 
 			echo "<p>Your new password is also sent to:
 				  <span style='font-weight:bold'>$to</span>.</p>";
 		}
+		
 		else {
 			echo "<p><span style='color:red;'>
 				  Mailer Error: Cannot send E-mail Address!</span></p>";
