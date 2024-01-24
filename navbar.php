@@ -68,4 +68,3 @@ if(isset($_SESSION["ShopperName"])) {
         </div>
     </div>
 </nav>
-
