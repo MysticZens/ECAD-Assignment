@@ -10,69 +10,169 @@ if (!isset($_SESSION["ShopperID"])) {
     header("Location: index.php");
     exit();
 }
-// End of To Do 1
+
+$shopperId = $_SESSION["ShopperID"];
+$qry = "SELECT * FROM Shopper WHERE ShopperID=?";
+$stmt = $conn->prepare($qry);
+$stmt->bind_param("i", $shopperId);
+$stmt->execute();
+
+$result = $stmt->get_result();
+$row = $result->fetch_array();
+$name = $row["Name"];
+$dob = $row["BirthDate"];
+$address = $row["Address"];
+$country = $row["Country"];
+$phone = substr($row["Phone"], 5);
+$email = $row["Email"];
+$pwd = $row["Password"];
+$pwdQuestion = $row["PwdQuestion"];
+$pwdAnswer = $row["PwdAnswer"];
+$currentDate = date('Y-m-d');
+$stmt->close();
 ?>
 
 <script type="text/javascript">
-function validateForm()
+function authenticateForm()
 {
     // Check if password matched
-	if (document.changePwd.pwd1.value != document.changePwd.pwd2.value) {
+	if (document.updateProfile.pwd1.value != document.updateProfile.pwd2.value) {
  	    alert("Passwords not matched!");
         return false;   // cancel submission
+    }
+
+    if (document.updateProfile.telephone.value != "") { 
+        var str = document.updateProfile.telephone.value; 
+        if (str.length != 8) {
+            alert("Please enter a 8-digit phone number."); 
+            return false; // cancel submission
+        }
+        else if (str.substr(0,1) != "6" &&
+                 str.substr(0,1) != "8" &&
+                 str.substr(0,1) != "9" ) {
+            alert("Phone number in Singapore should start with 6, 8 or 9.");
+            return false; // cancel submission
+        }
+    }
+
+    if (document.updateProfile.passwordQuestion.value != "") { 
+        var str = document.updateProfile.passwordQuestion.value; 
+        if (!str.endsWith("?") && !str.includes("?")) {
+            alert("A password question must include a '?' at the end of the question.");
+            return false;
+        }
     }
     return true;  // No error found
 }
 </script>
 <!-- Create a cenrally located container -->
-<div style="width:80%; margin:auto;">
-<form name="changePwd" method="post" onsubmit="return validateForm()">
-    <div class="form-group row">
+<div style="width:50%; margin:auto;">
+<form name="updateProfile" method="post" onsubmit="return authenticateForm()">
+    <div class="mb-3 row">
         <div class="col-sm-9 offset-sm-3">
-            <span class="page-title">Change Password</span>
+            <span class="page-title">Update Profile</span>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="username">Name:</label>
+        <div class="col-sm-9">
+            <input class="form-control" name="username" id="username" 
+                   type="text" maxlength="50" value="<?php echo $name; ?>" required />
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="birthdate">Date of Birth:</label>
+        <div class="col-sm-9">
+            <input class="form-control" name="birthdate" id="birthdate" type="date" value="<?php echo $dob; ?>" max="<?php echo $currentDate; ?>" />
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="address">Address:</label>
+        <div class="col-sm-9">
+            <textarea class="form-control" name="address" id="address"
+                      cols="25" rows="4" maxlength="150"><?php echo $address; ?></textarea>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="country">Country:</label>
+        <div class="col-sm-9">
+            <input class="form-control" name="country" id="country" type="text" maxlength="50" value="<?php echo $country; ?>" />
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="telephone">Phone:</label>
+        <div class="col-sm-9">
+            <input class="form-control" name="telephone" id="telephone" type="text" maxlength="20" value="<?php echo $phone; ?>" />
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="userEmail">
+         Email Address:</label>
+        <div class="col-sm-9">
+            <input class="form-control" name="userEmail" id="userEmail" 
+                   type="email" maxlength="50" value="<?php echo $email; ?>" required /> 
+        </div>
+    </div>
+    <div class="mb-3 row">
         <label class="col-sm-3 col-form-label" for="pwd1">
          New Password:</label>
         <div class="col-sm-9">
             <input class="form-control" name="pwd1" id="pwd1" 
-                   type="password" required />
+                   type="password" maxlength="50" value="<?php echo $pwd; ?>" required />
         </div>
     </div>
-    <div class="form-group row">
+    <div class="mb-3 row">
         <label class="col-sm-3 col-form-label" for="pwd2">
          Retype Password:</label>
         <div class="col-sm-9">
             <input class="form-control" name="pwd2" id="pwd2"
-                   type="password" required />
+                   type="password" maxlength="50" required />
         </div>
     </div>
-    <div class="form-group row">       
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="passwordQuestion">
+            Password Question:</label>
+        <div class="col-sm-9">
+            <input class="form-control" name="passwordQuestion" id="passwordQuestion" 
+                   type="text" maxlength="100" value="<?php echo $pwdQuestion; ?>" />        
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="passwordAnswer">
+            Password Answer:</label>
+        <div class="col-sm-9">
+            <input class="form-control" name="passwordAnswer" id="passwordAnswer" 
+                   type="text" maxlength="50" value="<?php echo $pwdAnswer; ?>" />        
+        </div>
+    </div>
+    <div class="mb-3 row">       
         <div class="col-sm-9 offset-sm-3">
-            <button type="submit">Update</button>
+            </br><button class="submitbutton" type="submit">Update</button>
         </div>
     </div>
 </form>
 
 <?php
 // Process after user click the submit button
-if (isset($_POST["pwd1"])) {
-	// To Do 2: Read new password entered by user
-	$password = $_POST["pwd1"];
-	
-	// To Do 3: Hash the default password
-	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-	
-	// To Do 4: Update the new password hash
-    $shopperId = $_SESSION["ShopperID"];
-	$qry = "UPDATE shopper SET Password=? WHERE ShopperID=?";
+if (isset($_POST["pwd1"]) && isset($_POST["pwd2"]) && isset($_POST["username"]) && isset($_POST["userEmail"])) {
+    $_SESSION["ShopperName"] = $username;
+    $username = $_POST["username"];
+    $userdob = $_POST["birthdate"];
+    $useraddress = $_POST["address"];
+    $usercountry = $_POST["country"];
+    $telephone = "(65) ".$_POST["telephone"];
+    $useremail = $_POST["userEmail"];
+    $password = $_POST["pwd1"];
+    $passwordQuestion = $_POST["passwordQuestion"];
+    $passwordAnswer = $_POST["passwordAnswer"];
+    $qry = "UPDATE shopper SET Name=?, BirthDate=?, Address=?, Country=?, Phone=?, Email=?, 
+            Password=?, PwdQuestion=?, PwdAnswer=? WHERE ShopperID=?";
     $stmt = $conn->prepare($qry);
-    $stmt->bind_param("si", $hashedPassword, $shopperId);
+    $stmt->bind_param("sssssssssi", $username, $userdob, $useraddress, $usercountry, $telephone, $useremail, $password, $passwordQuestion, $passwordAnswer, $shopperId);
     $stmt->execute();
-    $stmt->close();
+    $stmt->close();    
     echo "<br />";
-    echo "<p>Your new password is changed successfully.</p>";
+    echo "<p>Your profile has been updated successfully.</p>";
 }
 ?>
 

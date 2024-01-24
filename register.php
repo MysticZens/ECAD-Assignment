@@ -30,11 +30,19 @@ function validateForm()
         }
         str = "(65)" + str;
     }
+
+    if (document.register.pwdQuestion.value != "") { 
+        var str = document.register.pwdQuestion.value; 
+        if (!str.endsWith("?") && !str.includes("?")) {
+            alert("A password question must include a '?' at the end of the question.");
+            return false;
+        }
+    }
     return true;  // No error found
 }
 </script>
 
-<div style="width:80%; margin:auto;">
+<div style="width:50%; margin:auto;">
 <form name="register" action="createMember.php" method="post" 
       onsubmit="return validateForm()">
     <div class="mb-3 row">
@@ -46,7 +54,7 @@ function validateForm()
         <label class="col-sm-3 col-form-label" for="name">Name:</label>
         <div class="col-sm-9">
             <input class="form-control" name="name" id="name" 
-                   type="text" required /> (required)
+                   type="text" maxlength="50" required /> (required)
         </div>
     </div>
     <div class="mb-3 row">
@@ -59,19 +67,19 @@ function validateForm()
         <label class="col-sm-3 col-form-label" for="address">Address:</label>
         <div class="col-sm-9">
             <textarea class="form-control" name="address" id="address"
-                      cols="25" rows="4" ></textarea>
+                      cols="25" rows="4" maxlength="150"></textarea>
         </div>
     </div>
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label" for="country">Country:</label>
         <div class="col-sm-9">
-            <input class="form-control" name="country" id="country" type="text" />
+            <input class="form-control" name="country" id="country" type="text" maxlength="50" />
         </div>
     </div>
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label" for="phone">Phone:</label>
         <div class="col-sm-9">
-            <input class="form-control" name="phone" id="phone" type="text" />
+            <input class="form-control" name="phone" id="phone" type="text" maxlength="20" />
         </div>
     </div>
     <div class="mb-3 row">
@@ -79,7 +87,7 @@ function validateForm()
             Email Address:</label>
         <div class="col-sm-9">
             <input class="form-control" name="email" id="email" 
-                   type="email" required /> (required)
+                   type="email" maxlength="50" required /> (required)
         </div>
     </div>
     <div class="mb-3 row">
@@ -87,7 +95,7 @@ function validateForm()
             Password:</label>
         <div class="col-sm-9">
             <input class="form-control" name="password" id="password" 
-                   type="password" required /> (required)
+                   type="password" maxlength="50" required /> (required)
         </div>
     </div>
     <div class="mb-3 row">
@@ -95,7 +103,7 @@ function validateForm()
             Retype Password:</label>
         <div class="col-sm-9">
             <input class="form-control" name="password2" id="password2" 
-                   type="password" required /> (required)
+                   type="password" maxlength="50" required /> (required)
         </div>
     </div>
     <div class="mb-3 row">
@@ -103,7 +111,7 @@ function validateForm()
             Password Question:</label>
         <div class="col-sm-9">
             <input class="form-control" name="pwdQuestion" id="pwdQuestion" 
-                   type="text" />        
+                   type="text" maxlength="100" />        
         </div>
     </div>
     <div class="mb-3 row">
@@ -111,7 +119,7 @@ function validateForm()
             Password Answer:</label>
         <div class="col-sm-9">
             <input class="form-control" name="pwdAnswer" id="pwdAnswer" 
-                   type="text" />        
+                   type="text" maxlength="50" />        
         </div>
     </div>
     <div class="mb-3 row">       
