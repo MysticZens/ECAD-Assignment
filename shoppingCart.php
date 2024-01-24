@@ -48,6 +48,7 @@ if (isset($_SESSION["Cart"])) {
 		$quantity = 0;
 		echo "<tbody>"; // Start of table's body section
 		while ($row = $result->fetch_array()) {
+	
 			echo "<tr>";
 			echo "<td style= 'width: 50% ' > $row[Name]<br />";
 			echo "Product ID: $row[ProductID]</td>";

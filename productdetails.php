@@ -76,6 +76,7 @@ include("header.php"); // Include the Page Layout header
             echo "<input type='hidden' name='product_id' value='$pid' />";
             echo "Quantity: <input type='number' name='quantity' value='1' 
                         min='1' max='10' style='width: 40px' required />";
+            
             echo "<button type='submit' style='background-color: red; color: white;' disabled>Add to Cart</button>";
             echo "</br>";
             echo "<b style= 'color:red;'> Out Of Stock </b>";
