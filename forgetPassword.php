@@ -43,7 +43,7 @@ if (isset($_POST["eMail"])) {
 		// To Do 1: Update the default new password to shopper"s account
 		$row = $result->fetch_array();
 		$shopperId = $row["ShopperID"];
-		$new_pwd = "password"; // Default password
+		$new_pwd = "giftown"; // Default password
 		$qry = "UPDATE Shopper SET Password=? WHERE ShopperID=?"; 
 		$stmt = $conn->prepare($qry);
 		// "s" - string, "i" - integer
