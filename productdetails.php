@@ -19,57 +19,137 @@ include("header.php"); // Include the Page Layout header
 
     // To Do 1:  Display Product information. Starting ....
     while ($row = $result->fetch_array()) {
-        // Display Page Header -
-        // Product's name is read from the "ProductTitle" column of "product" table. 
-        echo "<div class='row' >";
-        echo "<div class='col-sm-12' style='padding:5px'>";
-        echo "<span class='page-title'>$row[ProductTitle]</span>";
-        echo "</div>";
-        echo "</div>";
+        if ($row["Quantity"] <= 0){
+            // Display Page Header -
+            // Product's name is read from the "ProductTitle" column of "product" table. 
+            echo "<div class='row' >";
+            echo "<div class='col-sm-12' style='padding:5px'>";
+            echo "<span class='page-title'>$row[ProductTitle]</span>";
+            echo "</div>";
+            echo "</div>";
 
-        echo "<div class='row'>"; // Start a new row
+            echo "<div class='row'>"; // Start a new row
 
-        // Left column - display the product's description, 
-        echo "<div class='col-sm-9' style='padding:5px'>";
-        echo "<p>$row[ProductDesc]</p>";
-        // Left column - display the product's Specification, 
-        $qry = "SELECT s.SpecName, ps.SpecVal from productspec ps 
-            INNER JOIN specification s ON ps. SpecID=s.SpecID 
-            WHERE ps.ProductID=?
-            ORDER BY ps.priority";
-        $stmt = $conn->prepare($qry);
-        $stmt->bind_param("i", $pid);
-        // "i" - integer
-        $stmt->execute();
-        $result2 = $stmt->get_result();
-        $stmt->close();
-        while ($row2 = $result2->fetch_array()) {
-            echo $row2["SpecName"] . ": " . $row2["SpecVal"] . "<br />";
+            // Left column - display the product's description, 
+            echo "<div class='col-sm-9' style='padding:5px'>";
+            echo "<p>$row[ProductDesc]</p>";
+            // Left column - display the product's Specification, 
+            $qry = "SELECT s.SpecName, ps.SpecVal from productspec ps 
+                INNER JOIN specification s ON ps. SpecID=s.SpecID 
+                WHERE ps.ProductID=?
+                ORDER BY ps.priority";
+            $stmt = $conn->prepare($qry);
+            $stmt->bind_param("i", $pid);
+            // "i" - integer
+            $stmt->execute();
+            $result2 = $stmt->get_result();
+            $stmt->close();
+            while ($row2 = $result2->fetch_array()) {
+                echo $row2["SpecName"] . ": " . $row2["SpecVal"] . "<br />";
+            }
+            echo "</div>"; // End of left column
+
+            // Right column - display the product's image 
+            $img = "./Images/products/$row[ProductImage]";
+            echo "<div class='col-sm-3' style='vertical-align:top; padding:5px'>";
+            echo "<p><img src='$img' style='width: 100%; max-width: 200px;' /></p>";
+            // Right column display the product's price 
+            if ($row["Offered"] == 1){
+                $formattedPrice = number_format($row["Price"], 2);
+                $formattedPrice2 = number_format($row["OfferedPrice"], 2);
+                echo "Price:<span style='font-weight:bold; color:red; text-decoration: line-through;'> 
+                S$ $formattedPrice</span>";
+                echo "<span style='font-weight:bold; color:red;'> 
+                &nbsp S$ $formattedPrice2</span>";
+            }
+            else if ($row["Offered"] == 0){
+                $formattedPrice = number_format($row["Price"], 2);
+                echo "Price:<span style='font-weight:bold; color:red;'> 
+                S$ $formattedPrice</span>";
+            }
+
+                // To Do 1:  Ending ....
+
+            // To Do 2:  Create a Form for adding the product to shopping cart. Starting ....
+            echo "<form action='cartFunctions.php' method='post'>";
+            echo "<input type='hidden' name='action' value='add' />";
+            echo "<input type='hidden' name='product_id' value='$pid' />";
+            echo "Quantity: <input type='number' name='quantity' value='1' 
+                        min='1' max='10' style='width: 40px' required />";
+            echo "<button type='submit' style='background-color: red; color: white;' disabled>Add to Cart</button>";
+            echo "</br>";
+            echo "<b style= 'color:red;'> Out Of Stock </b>";
+            echo "</form>";
+            echo "</div>"; // End of right column
+            echo "</div>"; // End of row
+            // To Do 2:  Ending ....
         }
-        echo "</div>"; // End of left column
+        else{
+            // Display Page Header -
+            // Product's name is read from the "ProductTitle" column of "product" table. 
+            echo "<div class='row' >";
+            echo "<div class='col-sm-12' style='padding:5px'>";
+            echo "<span class='page-title'>$row[ProductTitle]</span>";
+            echo "</div>";
+            echo "</div>";
 
-        // Right column - display the product's image 
-        $img = "./Images/products/$row[ProductImage]";
-        echo "<div class='col-sm-3' style='vertical-align:top; padding:5px'>";
-        echo "<p><img src='$img' style='width: 100%; max-width: 200px;' /></p>";
-        // Right column display the product's price 
-        $formattedPrice = number_format($row["Price"], 2);
-        echo "Price:<span style='font-weight:bold; color:red;'> 
-        S$ $formattedPrice</span>";
+            echo "<div class='row'>"; // Start a new row
+
+            // Left column - display the product's description, 
+            echo "<div class='col-sm-9' style='padding:5px'>";
+            echo "<p>$row[ProductDesc]</p>";
+            // Left column - display the product's Specification, 
+            $qry = "SELECT s.SpecName, ps.SpecVal from productspec ps 
+                INNER JOIN specification s ON ps. SpecID=s.SpecID 
+                WHERE ps.ProductID=?
+                ORDER BY ps.priority";
+            $stmt = $conn->prepare($qry);
+            $stmt->bind_param("i", $pid);
+            // "i" - integer
+            $stmt->execute();
+            $result2 = $stmt->get_result();
+            $stmt->close();
+            while ($row2 = $result2->fetch_array()) {
+                echo $row2["SpecName"] . ": " . $row2["SpecVal"] . "<br />";
+            }
+            echo "</div>"; // End of left column
+
+            // Right column - display the product's image 
+            $img = "./Images/products/$row[ProductImage]";
+            echo "<div class='col-sm-3' style='vertical-align:top; padding:5px'>";
+            echo "<p><img src='$img' style='width: 100%; max-width: 200px;' /></p>";
+            // Right column display the product's price 
+            if ($row["Offered"] == 1){
+                $formattedPrice = number_format($row["Price"], 2);
+                $formattedPrice2 = number_format($row["OfferedPrice"], 2);
+                echo "Price:<span style='font-weight:bold; color:red; text-decoration: line-through;'> 
+                S$ $formattedPrice</span>";
+                echo "<span style='font-weight:bold; color:red;'> 
+                &nbsp S$ $formattedPrice2</span>";
+            }
+            else if ($row["Offered"] == 0){
+                $formattedPrice = number_format($row["Price"], 2);
+                echo "Price:<span style='font-weight:bold; color:red;'> 
+                S$ $formattedPrice</span>";
+            }
+            
+
+                // To Do 1:  Ending ....
+
+            // To Do 2:  Create a Form for adding the product to shopping cart. Starting ....
+            echo "<form action='cartFunctions.php' method='post'>";
+            echo "<input type='hidden' name='action' value='add' />";
+            echo "<input type='hidden' name='product_id' value='$pid' />";
+            echo "Quantity: <input type='number' name='quantity' value='1' 
+                        min='1' max='10' style='width: 40px' required />";
+            echo "<button type='submit'>Add to Cart</button>";
+            echo "</form>";
+            echo "</div>"; // End of right column
+            echo "</div>"; // End of row
+            // To Do 2:  Ending ....
+        }
     }
-    // To Do 1:  Ending ....
 
-    // To Do 2:  Create a Form for adding the product to shopping cart. Starting ....
-    echo "<form action='cartFunctions.php' method='post'>";
-    echo "<input type='hidden' name='action' value='add' />";
-    echo "<input type='hidden' name='product_id' value='$pid' />";
-    echo "Quantity: <input type='number' name='quantity' value='1' 
-                min='1' max='10' style='width: 40px' required />";
-    echo "<button type='submit'>Add to Cart</button>";
-    echo "</form>";
-    echo "</div>"; // End of right column
-    echo "</div>"; // End of row
-    // To Do 2:  Ending ....
 
     $conn->close(); // Close database connnection
     echo "</div>"; // End of container
