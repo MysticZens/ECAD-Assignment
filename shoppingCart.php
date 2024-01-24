@@ -101,18 +101,18 @@ if (isset($_SESSION["Cart"])) {
 		$_SESSION["SubTotal"] = round($subTotal, 2);	
 
 		if ($_SESSION["SubTotal"] >= 200) {
-			$_SESSION["ShipCharge"] = 0;
+			$_SESSION["ExpressShipCharge"] = 0;
 		}
 
 		else {
-			$_SESSION["ShipCharge"] = 10;
+			$_SESSION["ExpressShipCharge"] = 10;
 		}
 
 		echo "<p style='text-align:right; font-size: 20px'> 
 		Normal Delivery Charge = S$5.00";
 
 		echo "<p style='text-align:right; font-size: 20px'> 
-			  Express Delivery Charge = S$". number_format($_SESSION["ShipCharge"], 2);
+			  Express Delivery Charge = S$". number_format($_SESSION["ExpressShipCharge"], 2);
 
 		echo "<p style='text-align:right; font-size: 20px'> 
 			  Total Quantity = ". number_format($quantity);
