@@ -36,8 +36,8 @@ if ($stmt->execute()) { // SQL statement executed successfully
     }
 
     // Successful message and Shopper ID
-    $Message = "Registration successful!<br />
-                Your Shopper ID is $_SESSION[ShopperID]<br />";
+    $Message = "<p style='text-align: center'>Registration successful!<br />
+                Your Shopper ID is $_SESSION[ShopperID]<p>";
     // Save the Shopper Name in a session variable
     $_SESSION["ShopperName"] = $name;
 }

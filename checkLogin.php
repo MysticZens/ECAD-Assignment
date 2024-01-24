@@ -9,15 +9,14 @@ $pwd = $_POST["password"];
 // To Do 1 (Practical 2): Validate login credentials with database
 // Include the PHP file that establishes database connection handle: $conn 
 include_once("mysql_conn.php");
-$qry = "SELECT * FROM Shopper WHERE Email=?";
+$qry = "SELECT * FROM Shopper WHERE Email=? AND Password=?";
 $stmt = $conn->prepare($qry);
-$stmt->bind_param("s", $email);
+$stmt->bind_param("ss", $email, $pwd);
 $stmt->execute();
 $result1 = $stmt->get_result();
 $stmt->close();
 if ($result1->num_rows > 0) {
     $row1 = $result1->fetch_array();
-    // Get the hashed password from database
     // Save user's info in session variables
     $_SESSION["ShopperName"] = $row1["Name"];
     $_SESSION["ShopperID"] = $row1["ShopperID"];
