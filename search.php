@@ -8,7 +8,7 @@ include("header.php"); // Include the Page Layout header
 <form name="frmSearch" method="get" action="">
     <div class="mb-3 row"> <!-- 1st row -->
         <div class="col-sm-9 offset-sm-3">
-            <span class="page-title">Product Search by Name or Description</span>
+            <span class="page-title">Product Search</span>
         </div>
     </div> <!-- End of 1st row -->
     <div class="mb-3 row"> <!-- 2nd row -->
@@ -19,11 +19,7 @@ include("header.php"); // Include the Page Layout header
                    type="search" />
         </div>
         <div class="col-sm-3">
-<<<<<<< HEAD
-            <button class = "submitbutton" type="submit">Search</button>
-=======
-            <button class="submitbutton" type="submit">Search</button>
->>>>>>> 0de2b3dfb7818557cee558b66b29fc89d8639c71
+            <button type="submit">Search</button>
         </div>
     </div>  <!-- End of 2nd row -->
 </form>
@@ -55,9 +51,8 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
         echo "<br />";
         echo "<span style = color:red>No products found.</span>";
     }
+	// To Do (DIY): End of Code
 }
-
-
 
 echo "</div>"; // End of container
 include("footer.php"); // Include the Page Layout footer
