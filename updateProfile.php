@@ -153,9 +153,9 @@ function authenticateForm()
 </form>
 
 <?php
+$checkEmail = true;
 // Process after user click the submit button
 if (isset($_POST["pwd1"]) && isset($_POST["pwd2"]) && isset($_POST["username"]) && isset($_POST["userEmail"])) {
-    $_SESSION["ShopperName"] = $username;
     $username = $_POST["username"];
     $userdob = $_POST["birthdate"];
     $useraddress = $_POST["address"];
@@ -165,18 +165,40 @@ if (isset($_POST["pwd1"]) && isset($_POST["pwd2"]) && isset($_POST["username"]) 
     $password = $_POST["pwd1"];
     $passwordQuestion = $_POST["passwordQuestion"];
     $passwordAnswer = $_POST["passwordAnswer"];
-    $qry = "UPDATE shopper SET Name=?, BirthDate=?, Address=?, Country=?, Phone=?, Email=?, 
-            Password=?, PwdQuestion=?, PwdAnswer=? WHERE ShopperID=?";
-    $stmt = $conn->prepare($qry);
-    $stmt->bind_param("sssssssssi", $username, $userdob, $useraddress, $usercountry, $telephone, $useremail, $password, $passwordQuestion, $passwordAnswer, $shopperId);
-    $stmt->execute();
-    $stmt->close();    
-    echo "<br />";
-    echo "<p>Your profile has been updated successfully.</p>";
+    $qry1 = "SELECT Email FROM shopper WHERE Email!=?";
+    $statement = $conn->prepare($qry1);
+    $statement->bind_param("s", $email);
+    $statement->execute();
+    $result = $statement->get_result();
+    while ($row = $result->fetch_array()) {
+        if ($row["Email"] == $useremail) {
+            $checkEmail = false;
+        }
+    }
+    $statement->close();
+
+    if ($checkEmail) {
+        $qry2 = "UPDATE shopper SET Name=?, BirthDate=?, Address=?, Country=?, Phone=?, Email=?, 
+                Password=?, PwdQuestion=?, PwdAnswer=? WHERE ShopperID=?";
+        $stmt = $conn->prepare($qry2);
+        $stmt->bind_param("sssssssssi", $username, $userdob, $useraddress, $usercountry, $telephone, $useremail, $password, $passwordQuestion, $passwordAnswer, $shopperId);
+        $stmt->execute(); 
+        $stmt->close();   
+        echo "<br />";
+        echo "<p>Your profile has been updated successfully.</p>";
+        $_SESSION["ShopperName"] = $username;
+    }
+
+    else {
+        echo "<br />";
+        echo "<p>Email Address already exists in the system!</p>";
+        $_SESSION["ShopperName"] = $name;
+    }
 }
 ?>
 
 </div> <!-- Closing container -->
 <?php 
+$conn->close();
 include("footer.php"); // Include the Page Layout footer
 ?>
