@@ -28,7 +28,7 @@ function addItem() {
 	// Check if a shopping cart exist, if not create a new shopping cart
 	if (!isset($_SESSION["Cart"])) {
 		// Create a shopping cart for the shopper
-		$qry = "INSERT INTO Shopcart (ShopperID) VALUES (?)"; 
+		$qry = "INSERT INTO shopcart (ShopperID) VALUES (?)"; 
 		$stmt = $conn->prepare($qry);
 		$stmt->bind_param("i", $_SESSION["ShopperID"]); // "i" = integer
 		$stmt->execute();
@@ -42,7 +42,7 @@ function addItem() {
   	// update the quantity, else add the item to the Shopping Cart 
 	$pid = $_POST["product_id"];
 	$quantity = $_POST["quantity"];
-	$qry = "SELECT * FROM ShopCartItem WHERE ShopCartID=? AND ProductID=?";
+	$qry = "SELECT * FROM shopcartitem WHERE ShopCartID=? AND ProductID=?";
 	$stmt = $conn->prepare($qry);
 	$stmt->bind_param("ii", $_SESSION["Cart"], $pid); // "i" - integer
 	$stmt->execute();
@@ -51,7 +51,7 @@ function addItem() {
 	$addNewItem = 0;
 	if ($result->num_rows > 0) { // Selected product exists in shopping cart 
 		// increase the quantity of purchase
-		$qry = "UPDATE ShopCartItem SET Quantity=LEAST (Quantity+?, 10) 
+		$qry = "UPDATE shopcartitem SET Quantity=LEAST (Quantity+?, 10) 
 				WHERE ShopCartID=? AND ProductID=?";
 		$stmt = $conn->prepare($qry);
 		// "iii" 3 integers
@@ -60,33 +60,14 @@ function addItem() {
 		$stmt->close();
 	}
 	else { //Selected product has yet to be added to shopping cart
-		$testQuery = "SELECT * FROM Product WHERE ProductID=$pid";
-		$result = $conn -> query($testQuery);
-
-		while ($row = $result -> fetch_array()){
-			if ($row["Offered"] == 1){
-                $qry = "INSERT INTO ShopCartItem(ShopCartID, ProductID, Price, Name, Quantity) 
-				SELECT ?, ?, OfferedPrice, ProductTitle, ? FROM Product WHERE ProductID=?";
-				$stmt = $conn->prepare($qry);
-				// "iiii" - 4 integers
-				$stmt->bind_param("iiii", $_SESSION["Cart"], $pid, $quantity, $pid);
-				$stmt->execute();
-				$stmt->close();
-				$addNewItem = 1;
-            }
-            else if ($row["Offered"] == 0){
-                $qry = "INSERT INTO ShopCartItem(ShopCartID, ProductID, Price, Name, Quantity) 
-				SELECT ?, ?, Price, ProductTitle, ? FROM Product WHERE ProductID=?";
-				$stmt = $conn->prepare($qry);
-				// "iiii" - 4 integers
-				$stmt->bind_param("iiii", $_SESSION["Cart"], $pid, $quantity, $pid);
-				$stmt->execute();
-				$stmt->close();
-				$addNewItem = 1;
-            }
-		}
-
-		
+		$qry = "INSERT INTO shopcartitem (ShopCartID, ProductID, Price, Name, Quantity) 
+				SELECT ?, ?, Price, ProductTitle, ? FROM product WHERE ProductID=?";
+		$stmt = $conn->prepare($qry);
+		// "iiii" - 4 integers
+		$stmt->bind_param("iiii", $_SESSION["Cart"], $pid, $quantity, $pid);
+		$stmt->execute();
+		$stmt->close();
+		$addNewItem = 1;
 	}
   	$conn->close();
   	// Update session variable used for counting number of items in the shopping cart.
@@ -115,7 +96,7 @@ function updateItem() {
 	$pid = $_POST["product_id"];
 	$quantity = $_POST["quantity"];
 	include_once("mysql_conn.php"); // Establish database connection handle: $conn 
-	$qry = 	"UPDATE ShopCartItem SET Quantity=? WHERE ProductID=? AND ShopCartID=?";
+	$qry = 	"UPDATE shopcartitem SET Quantity=? WHERE ProductID=? AND ShopCartID=?";
  	$stmt = $conn->prepare($qry);
 	$stmt->bind_param("iii", $quantity, $pid, $cartid);
 	$stmt->execute(); 
@@ -138,21 +119,21 @@ function removeItem() {
 	$cartid = $_SESSION["Cart"];
 	$pid = $_POST["product_id"];
 	include_once("mysql_conn.php");
-	$qry = "DELETE FROM ShopCartItem WHERE ProductID=? AND ShopCartID=?";
+	$qry = "DELETE FROM shopcartitem WHERE ProductID=? AND ShopCartID=?";
 	$stmt = $conn->prepare($qry);
 	$stmt->bind_param("ii", $pid, $cartid);
 	$stmt->execute(); 
 	$stmt->close();
 
 	if (isset($_SESSION["NumCartItem"])) {
-        $qry = "SELECT COUNT(*) AS NumItems FROM ShopCartItem WHERE ShopCartID=?"; // Get number of unique items in cart
+        $qry = "SELECT COUNT(*) AS NumItems FROM shopcartitem WHERE ShopCartID=?";
         $stmt = $conn->prepare($qry);
         $stmt->bind_param("i", $cartid);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        $numItems = $row["NumItems"]; // Retrieves the number of unique items in the cart after an item is deleted
-        $_SESSION["NumCartItem"] = $numItems; // Updates the number of unique items in the Session variable "NumCartItem"
+        $numItems = $row["NumItems"];
+        $_SESSION["NumCartItem"] = $numItems;
         $stmt->close();
     }
 
