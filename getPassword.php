@@ -18,7 +18,6 @@ $stmt->close();
 ?>
 
 <?php
-
 function generateRandomPassword() {
     $length = rand(8, 20);
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-=+;:,<.>';
