@@ -7,7 +7,7 @@ include_once("mysql_conn.php");
 
 // To Do 1: Check if user logged in 
 if (!isset($_SESSION["ShopperID"])) {
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 

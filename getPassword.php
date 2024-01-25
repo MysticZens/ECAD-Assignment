@@ -1,6 +1,11 @@
 <?php 
 session_start(); // Detect the current session
 include("header.php"); // Include the Page Layout header
+if (!isset($_SESSION["TempEmail"])) { // Check if user logged in 
+	// redirect to login page if the session variable shopperid is not set
+	header ("Location: forgetPassword.php");
+	exit;
+}
 include_once("mysql_conn.php");
 $qry = "SELECT * FROM Shopper WHERE Email=?";
 $stmt = $conn->prepare($qry);
@@ -96,7 +101,7 @@ if (isset($_POST["passwordAnswer"])) {
 		if(smtpmailer($to, $from, $from_name, $subject, $body)) { 
 			echo "<p>Your new password is sent to:
 				  <span style='font-weight:bold'>$to</span>.</p>";
-            unset($_SESSION["TempShopperID"]);
+            unset($_SESSION["TempEmail"]);
 		}
 		
 		else {
