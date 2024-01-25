@@ -49,8 +49,12 @@ if($_POST) //Post Data received from Shopping cart page.
 	$_SESSION["NormalShipCharge"] = 5.00;
 	
 	// Data to be sent to PayPal - FOR EXPRESS PAYMENT ONLY
-    // EXPRESS SHIP CHARGE SESSION IS RETRIEVED FROM SHOPPINGCART.PHP PAGE
-	$padata = '&CURRENCYCODE='.urlencode($PayPalCurrencyCode).
+    // $_SESSION["ExpressShipCharge"] IS RETRIEVED FROM SHOPPINGCART.PHP PAGE
+	// USE $_SESSION["ExpressShipCharge"] to retrieve express ship charge
+	// If the subtotal exceeds 200, give them free express ship charge
+	if ($_SESSION["SubTotal"] > 200)
+	{
+		$padata = '&CURRENCYCODE='.urlencode($PayPalCurrencyCode).
 			  '&PAYMENTACTION=Sale'.
 			  '&ALLOWNOTE=1'.
 			  '&PAYMENTREQUEST_0_CURRENCYCODE='.urlencode($PayPalCurrencyCode).
@@ -64,6 +68,15 @@ if($_POST) //Post Data received from Shopping cart page.
 			  $paypal_data.				
 			  '&RETURNURL='.urlencode($PayPalReturnURL ).
 			  '&CANCELURL='.urlencode($PayPalCancelURL);	
+	}
+
+	// If subtotal does NOT exceed 200
+	// USE $_SESSION["NormalShipCharge"] to retrieve normal ship charge
+	else 
+	{
+		
+	}
+	
 		
 	//We need to execute the "SetExpressCheckOut" method to obtain paypal token
 	$httpParsedResponseAr = PPHttpPost('SetExpressCheckout', $padata, $PayPalApiUsername, 

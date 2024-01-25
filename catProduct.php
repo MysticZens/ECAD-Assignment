@@ -62,6 +62,8 @@ include("header.php"); // Include the Page Layout header
             S$ $formattedPrice</span>";
             echo "<span style='font-weight: bold; color: red;'> 
             &nbsp S$ $formattedPrice2</span>";
+            echo "<span style='font-weight: bold; color: red;'> 
+            (on offer)</span>";
             echo "</div>";
     
             // Right column display the product's image 

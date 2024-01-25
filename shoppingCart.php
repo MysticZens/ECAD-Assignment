@@ -98,21 +98,30 @@ if (isset($_SESSION["Cart"])) {
 		// Display the subtotal at the end of the shopping cart
 		echo "<p style='text-align:right; font-size: 20px'> 
 			  Subtotal = S$". number_format($subTotal, 2);
-		$_SESSION["SubTotal"] = round($subTotal, 2);	
+		$_SESSION["SubTotal"] = round($subTotal, 2);
+		$_SESSION["NormalShipCharge"] = 5.00;	
 
-		if ($_SESSION["SubTotal"] >= 200) {
+		// If subtotal exceeds 200
+		if ($_SESSION["SubTotal"] > 200) {
 			$_SESSION["ExpressShipCharge"] = 0;
+			
+			// echo "<p style='text-align:right; font-size: 20px'> 
+		 	// Your subtotal exceeds $200! You quality for free express shipping!";
+
+			echo "<p style='text-align:right; font-size: 20px'> 
+		 	Express Delivery Charge = S$". number_format($_SESSION["ExpressShipCharge"], 2);
 		}
 
+		// If subtotal less than 200
 		else {
 			$_SESSION["ExpressShipCharge"] = 10;
+
+			echo "<p style='text-align:right; font-size: 20px'> 
+			Normal Delivery Charge = S$".number_format($_SESSION["NormalShipCharge"], 2);
+
+			echo "<p style='text-align:right; font-size: 20px'> 
+		 	Express Delivery Charge = S$". number_format($_SESSION["ExpressShipCharge"], 2);
 		}
-
-		echo "<p style='text-align:right; font-size: 20px'> 
-		Normal Delivery Charge = S$5.00";
-
-		echo "<p style='text-align:right; font-size: 20px'> 
-			  Express Delivery Charge = S$". number_format($_SESSION["ExpressShipCharge"], 2);
 
 		echo "<p style='text-align:right; font-size: 20px'> 
 			  Total Quantity = ". number_format($quantity);
