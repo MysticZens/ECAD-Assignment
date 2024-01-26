@@ -104,7 +104,7 @@ function updateItem() {
 	$conn->close();
 	header ("Location: shoppingCart.php");
 	exit;
-	// "i" integer	
+	// "i" integer
 }
 
 function removeItem() {
