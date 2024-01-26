@@ -44,7 +44,7 @@ function generateRandomPassword() {
         <label class="col-sm-3 col-form-label" for="passwordQuestion">
             Password Question:</label>
         <div class="col-sm-9">
-            <p><?php echo $pwdQuestion ?><p>     
+            <p class="col-form-label"><?php echo $pwdQuestion ?></p>  
         </div>
     </div>
     <div class="mb-3 row">
@@ -57,7 +57,7 @@ function generateRandomPassword() {
     </div>
     <div class="mb-3 row">       
         <div class="col-sm-9 offset-sm-3">
-            </br><button class="submitbutton" type="submit">Get Password</button>
+            <br /><button class="submitbutton" type="submit">Get Password</button>
         </div>
     </div>
 </form>

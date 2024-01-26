@@ -55,7 +55,7 @@ if (isset($_POST["eMail"])) {
 		exit();
     }
 
-	else if (!$checkPassword) {
+	else if (!$checkPassword && $checkEmail) {
 		echo "<p><span>
 			  Please contact: <b><a href='mailto:giftownSingapore@np.edu.sg' style='text-decoration: none; color: red'>
 			  gifttownsingapore@gmail.com</a></b> for external help to reset your password.</span></p>";
