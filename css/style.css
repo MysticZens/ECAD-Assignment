@@ -40,3 +40,42 @@ body {
   font-weight: bold;
   padding: 0.3% 1.2% 0.3% 1.2%;
 }
+
+.rating {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	grid-gap: .5rem;
+	color: yellow;
+	margin-bottom: 2rem;
+}
+
+/* Give pointer to cursor when hovered */
+.rating .fa-star {
+	cursor: pointer;
+}
+/* Give the bouncing effect to the stars */
+.rating .fa-star.active {
+	opacity: 0;
+	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
+}
+
+@keyframes animate {
+	0% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Give the scale 1.1 when hover */
+.rating .fa-star:hover {
+	transform: scale(1.1);
+}

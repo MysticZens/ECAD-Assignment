@@ -147,7 +147,7 @@ function authenticateForm()
     </div>
     <div class="mb-3 row">       
         <div class="col-sm-9 offset-sm-3">
-            </br><button class="submitbutton" type="submit">Update</button>
+            <br /><button class="submitbutton" type="submit">Update</button>
         </div>
     </div>
 </form>
