@@ -29,21 +29,21 @@ include_once("mysql_conn.php");
 				// Output data of each row
 				while($row = $result->fetch_array()) {
 					echo "<tr>";
-					echo "<td style='background-color: #e66d5d'>" . htmlspecialchars($row["Name"]) . "</td>";
-					echo "<td style='background-color: #e66d5d'>" . htmlspecialchars($row["Subject"]) . "</td>";
-					echo "<td style='background-color: #e66d5d'>" . htmlspecialchars($row["Content"]) . "</td>";
-					echo "<td style='background-color: #e66d5d; text-align: center;'>";
+					echo "<td style='background-color: #ffbebe'>" . htmlspecialchars($row["Name"]) . "</td>";
+					echo "<td style='background-color: #ffbebe'>" . htmlspecialchars($row["Subject"]) . "</td>";
+					echo "<td style='background-color: #ffbebe'>" . htmlspecialchars($row["Content"]) . "</td>";
+					echo "<td style='background-color: #ffbebe; text-align: center;'>";
 					for ($i=0; $i<$row["Rank"]; $i++) {
-						echo "<i class='fa-solid fa-star' style='color: #ffe63b; background-color: #e66d5d; margin: 0; padding: 0'></i>";
+						echo "<i class='fa-solid fa-star' style='color: #ffe63b; background-color: #ffbebe; margin: 0; padding: 0'></i>";
 					}
 					echo "</td>";
 					// Add more cells as needed
-					echo "<td style='background-color: #e66d5d'>" . htmlspecialchars($row["DateTimeCreated"]) . "</td>";
+					echo "<td style='background-color: #ffbebe'>" . htmlspecialchars($row["DateTimeCreated"]) . "</td>";
 					echo "</tr>";
 				}
 			} 
 			else {
-				echo "<tr><td colspan='4'><p style='color: red; font-size: 25px; text-align: center'><b>No records found!</b><p></td></tr>";
+				echo "<tr><td colspan='4'><p style='color: red; font-size: 25px; text-align: center; background-color: #ffbebe'><b>No records found!</b><p></td></tr>";
 			}
   		?>
     </tbody>

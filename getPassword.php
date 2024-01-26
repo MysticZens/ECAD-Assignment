@@ -97,10 +97,16 @@ if (isset($_POST["passwordAnswer"])) {
 				$new_pwd</span>.<br />
 				Do change this default password in the ecommerce website. </span>";
 		// Initiate the e-mailing sending process
-		if(smtpmailer($to, $from, $from_name, $subject, $body)) { 
-			echo "<p>Your new password is sent to:
-				  <span style='font-weight:bold'>$to</span>.</p>";
+		if(smtpmailer($to, $from, $from_name, $subject, $body)) {
+            echo $body; 
+			echo "<p>Your new password is also sent to:
+				  <span style='font-weight:bold'>$to</span>. Please check your email account.</p>";
             unset($_SESSION["TempEmail"]);
+            echo "<script>
+                  setTimeout(function() {
+                      window.location.href = 'forgetPassword.php';
+                  }, 3000);
+                  </script>";
 		}
 		
 		else {

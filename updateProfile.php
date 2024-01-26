@@ -185,13 +185,18 @@ if (isset($_POST["pwd1"]) && isset($_POST["pwd2"]) && isset($_POST["username"]) 
         $stmt->execute(); 
         $stmt->close();   
         echo "<br />";
-        echo "<p>Your profile has been updated successfully.</p>";
+        echo "<p><span style='color:red'>Your profile has been updated successfully.</span></p>";
         $_SESSION["ShopperName"] = $username;
+        echo "<script>
+                setTimeout(function() {
+                    window.location.href = 'index.php';
+                }, 3000);
+                </script>";
     }
 
     else {
         echo "<br />";
-        echo "<p>Email Address already exists in the system!</p>";
+        echo "<p><span style='color:red'>Email Address already exists in the system!</span></p>";
         $_SESSION["ShopperName"] = $name;
     }
 }
