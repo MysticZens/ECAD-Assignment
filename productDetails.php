@@ -37,7 +37,7 @@ include("header.php"); // Include the Page Layout header
             $qry = "SELECT s.SpecName, ps.SpecVal from productspec ps 
                 INNER JOIN specification s ON ps. SpecID=s.SpecID 
                 WHERE ps.ProductID=?
-                ORDER BY ps.priority";
+                ORDER BY ps.Priority";
             $stmt = $conn->prepare($qry);
             $stmt->bind_param("i", $pid);
             // "i" - integer
@@ -103,7 +103,7 @@ include("header.php"); // Include the Page Layout header
             $qry = "SELECT s.SpecName, ps.SpecVal from productspec ps 
                 INNER JOIN specification s ON ps. SpecID=s.SpecID 
                 WHERE ps.ProductID=?
-                ORDER BY ps.priority";
+                ORDER BY ps.Priority";
             $stmt = $conn->prepare($qry);
             $stmt->bind_param("i", $pid);
             // "i" - integer

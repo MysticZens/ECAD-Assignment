@@ -17,7 +17,7 @@ if (isset($_SESSION["Cart"])) {
 	// Retrieve from database and display shopping cart in a table
 	
     $qry = "SELECT *, (Price*Quantity) AS Total 
-			FROM ShopCartItem WHERE ShopCartID=?";
+			FROM shopcartitem WHERE ShopCartID=?";
 	$stmt = $conn->prepare($qry);
 	$stmt->bind_param("i", $_SESSION["Cart"]); // "i" - integer
 	$stmt->execute();

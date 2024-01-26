@@ -59,6 +59,7 @@ function addItem() {
 		$stmt->execute();
 		$stmt->close();
 	}
+	
 	else { //Selected product has yet to be added to shopping cart
 		$qry = "INSERT INTO shopcartitem (ShopCartID, ProductID, Price, Name, Quantity) 
 				SELECT ?, ?, Price, ProductTitle, ? FROM product WHERE ProductID=?";
