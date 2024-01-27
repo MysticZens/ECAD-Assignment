@@ -105,7 +105,7 @@ if (isset($_POST["passwordAnswer"])) {
             echo "<script>
                   setTimeout(function() {
                       window.location.href = 'forgetPassword.php';
-                  }, 3000);
+                  }, 15000);
                   </script>";
 		}
 		
