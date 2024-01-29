@@ -18,6 +18,32 @@ include("header.php"); // Include the Page Layout header
             <input class="form-control" name="keywords" id="keywords" 
                    type="search" />
         </div>
+    </div>
+    <div class="mb-3 row"> <!-- 2nd row -->
+        <label for="keywords1" 
+               class="col-sm-3 col-form-label">Occasion:</label>
+        <div class="col-sm-6">
+            <input class="form-control" name="keywords1" id="keywords1" 
+                   type="search" />
+        </div>
+    </div>
+    <div class="mb-3 row"> <!-- 2nd row -->
+        <label for="keywords2" 
+               class="col-sm-3 col-form-label">Max Price:</label>
+        <div class="col-sm-6">
+            <input class="form-control" name="keywords2" id="keywords2" 
+                   type="number" />
+        </div>
+    </div>
+    <div class="mb-3 row"> <!-- 2nd row -->
+        <label for="keywords3" 
+               class="col-sm-3 col-form-label">Min Price:</label>
+        <div class="col-sm-6">
+            <input class="form-control" name="keywords3" id="keywords3" 
+                   type="number" />
+        </div>
+    </div>
+    <div class="mb-3 row">
         <div class="col-sm-3">
             <button type="submit">Search</button>
         </div>
@@ -28,14 +54,34 @@ include("header.php"); // Include the Page Layout header
 
 include_once("mysql_conn.php");
 // The non-empty search keyword is sent to server
-if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
+if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") & 
+    (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
+    (isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
+    (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")){
     // To Do (DIY): Retrieve list of product records with "ProductTitle" 
     $keywords = '%' . $_GET["keywords"] . '%';
     $result = $_GET["keywords"];
-    echo "Search results for <b>" . $result . "</b>: ";
+    $keywords1 = '%' . $_GET["keywords1"] . '%';
+    $result1 = $_GET["keywords1"];
+    $keywords2 = intval($_GET["keywords2"]);  // Convert to integer
+    $result2 = $_GET["keywords2"];
+    $keywords3 = intval($_GET["keywords3"]);  // Convert to integer
+    $result3 = $_GET["keywords3"];
+    echo "Search results for Title/Description : <b>" . $result . "</b> Occasion :<b>" 
+    . $result1 ."</b> Max Price :<b>" . $result2 ."</b> Min Price :<b>" . $result3;
     
-    $qry = "SELECT ProductID, ProductTitle, ProductDesc FROM product WHERE ProductTitle 
-    LIKE '%$keywords%' OR ProductDesc LIKE '%$keywords%' ORDER BY ProductTitle";
+    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductDesc, 
+    CASE WHEN p.Offered = 1 THEN p.OfferedPrice ELSE p.Price END AS CurrentPrice,
+    ps.SpecVal, ps.SpecID 
+    FROM product p 
+    INNER JOIN productspec ps ON p.ProductID = ps.ProductID
+    WHERE (p.ProductTitle LIKE '%$keywords%' OR p.ProductDesc LIKE '%$keywords%') 
+    AND ps.SpecID = 1
+    AND (ps.SpecVal LIKE '%$keywords1%' OR p.ProductDesc LIKE '%$keywords1%')
+    AND ((p.Offered = 1 AND p.OfferedPrice <= $keywords2) OR (p.Offered = 0 AND p.Price <= $keywords2))
+    AND ((p.Offered = 1 AND p.OfferedPrice >= $keywords3) OR (p.Offered = 0 AND p.Price >= $keywords3))
+    ORDER BY ProductTitle";
+
  
     $result = mysqli_query($conn, $qry);
 
@@ -52,6 +98,10 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
         echo "<span style = color:red>No products found.</span>";
     }
 	// To Do (DIY): End of Code
+}
+else {
+    echo "<br />";
+    echo "<span>Please Enter Values into all the Fields!</span>";
 }
 
 echo "</div>"; // End of container
