@@ -30,7 +30,7 @@ while ($row = $result->fetch_array()) {
 }
 if ($checkEmail) {
     // Define the INSERT SQL statement
-    $qry2 = "INSERT INTO Shopper (Name, BirthDate, Address, Country, Phone, Email, Password, PwdQuestion, PwdAnswer, ActiveStatus, DateEntered) 
+    $qry2 = "INSERT INTO shopper (Name, BirthDate, Address, Country, Phone, Email, Password, PwdQuestion, PwdAnswer, ActiveStatus, DateEntered) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)";
     $stmt = $conn->prepare($qry2);
     // "ssssssssss" 10 string parameters

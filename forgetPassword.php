@@ -2,15 +2,16 @@
 session_start(); // Detect the current session
 include("header.php"); // Include the Page Layout header
 ?>
+
 <!-- Create a cenrally located container -->
-<div style="width:80%; margin:auto;">
+<div style="width:50%; margin:auto;">
 <form method="post">
-	<div class="form-group row">
+	<div class="row mb-3">
 		<div class="col-sm-9 offset-sm-3">
 			<span class="page-title">Forget Password</span>
 		</div>
 	</div>
-	<div class="form-group row">
+	<div class="row mb-3">
 		<label class="col-sm-3 col-form-label" for="eMail">
          Email Address:</label>
 		<div class="col-sm-9">
@@ -18,12 +19,13 @@ include("header.php"); // Include the Page Layout header
                    type="email" required />
 		</div>
 	</div>
-	<div class="form-group row">      
+	<div class="row mb-3">      
 		<div class="col-sm-9 offset-sm-3">
             <br />
 			<button class="submitbutton" type="submit">Submit</button>
 		</div>
 	</div>
+	
 </form>
 
 <?php 
@@ -33,57 +35,36 @@ if (isset($_POST["eMail"])) {
 	$eMail = $_POST["eMail"];
 	// Retrieve shopper record based on e-mail address
 	include_once("mysql_conn.php");
-	$qry = "SELECT * FROM Shopper WHERE Email=?";
-	$stmt = $conn->prepare($qry);
-	$stmt->bind_param("s", $eMail); 	// "s" - string 
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$stmt->close();
-	if ($result->num_rows > 0) {
-		// To Do 1: Update the default new password to shopper"s account
-		$row = $result->fetch_array();
-		$shopperId = $row["ShopperID"];
-		$new_pwd = "giftown"; // Default password
-		$qry = "UPDATE Shopper SET Password=? WHERE ShopperID=?"; 
-		$stmt = $conn->prepare($qry);
-		// "s" - string, "i" - integer
-		$stmt->bind_param("si", $new_pwd, $shopperId);
-		$stmt->execute();
-		$stmt->close();
-		// End of To Do 1
-		
-		// To Do 2: e-Mail the new password to user
-		include("myMail.php");
-		// The "Send To" should be the e-mail address indicated
-		// by shopper, i.e $eMail. In this case, use a testing e-mail 
-		// address as the shopper's e-mail address in our database 
-		// may not be a valid account.
-		$to=$eMail; // use the gmail account that the user has logged in with
-		$from="giftownsingapore@gmail.com"; // use the gmail account created
-		$from_name="Giftown Singapore Online Gift Store";
-		$subject="Giftown Singapore Login Password"; // e-mail title 
-		// HTML body message
-		$body="<span style='color:black; font-size:15px'>
-				Your new password is <span style='font-weight:bold'> 
-				$new_pwd</span>.<br />
-				Do change this default password in the ecommerce website. </span>";
-		// Initiate the e-mailing sending process
-		if(smtpmailer($to, $from, $from_name, $subject, $body)) { 
-			echo "<p>Your new password is also sent to:
-				  <span style='font-weight:bold'>$to</span>.</p>";
-		}
-		
-		else {
-			echo "<p><span style='color:red;'>
-				  Mailer Error: Cannot send E-mail Address!</span></p>";
-		}
-		// End of To Do 2
+	$qry = "SELECT Email, PwdQuestion FROM shopper";
+    $result = $conn->query($qry);
+	$checkEmail = false;
+	$checkPassword = false;
+    while ($row = $result->fetch_array()) {
+        if ($row["Email"] == $eMail) {
+			$_SESSION["TempEmail"] = $eMail;
+            $checkEmail = true;
+			if ($row["PwdQuestion"] != "" || $row["PwdQuestion"] != null) {
+				$checkPassword = true;
+			}
+        }
+    }
+	$conn->close();
+
+    if ($checkEmail && $checkPassword) {
+		header("Location: getPassword.php");
+		exit();
+    }
+
+	else if (!$checkPassword && $checkEmail) {
+		echo "<p><span>
+			  Please contact: <b><a href='mailto:giftownSingapore@np.edu.sg' style='text-decoration: none; color: red'>
+			  gifttownsingapore@gmail.com</a></b> for external help to reset your password.</span></p>";
 	}
-	else {
-		echo "<p><span style='color:red;'>
+
+    else {
+        echo "<p><span style='color:red;'>
 		      Invalid E-mail address!</span></p>";
 	}
-	$conn->close();
 }
 ?>
 

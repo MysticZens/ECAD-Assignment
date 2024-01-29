@@ -14,7 +14,7 @@ body {
 }
 
 .bg-custom {
-  background-color: #e66d5d;
+  background-color: #ffbebe;
 }
 
 .nav-link {
@@ -40,3 +40,13 @@ body {
   font-weight: bold;
   padding: 0.3% 1.2% 0.3% 1.2%;
 }
+
+.rating {
+	display: flex;
+	justify-content: left;
+	align-items: left;
+	grid-gap: .5rem;
+	color: yellow;
+	margin-bottom: 2rem;
+}
+

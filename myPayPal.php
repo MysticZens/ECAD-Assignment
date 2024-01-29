@@ -1,7 +1,7 @@
 <?php
 $PayPalMode 		= 'sandbox'; // sandbox or live
-$PayPalApiUsername 	= 'sb-et77z26653805_api1.business.example.com'; 		//PayPal API Username
-$PayPalApiPassword 	= 'SUXL3K2L82SVNL88'; 		//Paypal API password
+$PayPalApiUsername 	= 'sb-qy0fx28499457_api1.business.example.com'; 		//PayPal API Username
+$PayPalApiPassword 	= 'LJHEX9PWVPXNJ4F3'; 		//Paypal API password
 $PayPalApiSignature = 'A9b3kG6U2Eg3SyAwpqlPRGzOdvUiAU07Mhwf0BrbYE52nM0J.btnJXpS'; 		//Paypal API Signature
 $PayPalCurrencyCode = 'SGD'; //Paypal Currency Code
 //URL to redirect to after PayPal has complete the online payment
@@ -76,4 +76,3 @@ function PPHttpPost($methodName_, $nvpStr_, $PayPalApiUsername, $PayPalApiPasswo
 		
 	return $httpParsedResponseAr;
 }
-?>

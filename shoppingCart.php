@@ -17,7 +17,7 @@ if (isset($_SESSION["Cart"])) {
 	// Retrieve from database and display shopping cart in a table
 	
     $qry = "SELECT *, (Price*Quantity) AS Total 
-			FROM ShopCartItem WHERE ShopCartID=?";
+			FROM shopcartitem WHERE ShopCartID=?";
 	$stmt = $conn->prepare($qry);
 	$stmt->bind_param("i", $_SESSION["Cart"]); // "i" - integer
 	$stmt->execute();
@@ -76,7 +76,7 @@ if (isset($_SESSION["Cart"])) {
 			echo "<form action = 'cartFunctions.php' method='post'>";
 			echo "<input type='hidden' name='action' value='remove' />";
 			echo "<input type='hidden' name='product_id' value='$row[ProductID]' />";
-			echo "<input type='image' src='images/trash-can.png' title='Remove Item' />"; 
+			echo "<input type='image' src='images/trash-can.png' style='width:20px; height:20px' title='Remove Item' />"; 
 			echo "</form>";
 			echo "</td>";
 			echo "</tr>";
@@ -96,7 +96,7 @@ if (isset($_SESSION["Cart"])) {
 				
 		// To Do 4 (Practical 4): 
 		// Display the subtotal at the end of the shopping cart
-		echo "<p style='text-align:right; font-size: 20px'> 
+		echo "<p style='text-align:right; font-size: 18px'> 
 			  Subtotal = S$". number_format($subTotal, 2);
 		$_SESSION["SubTotal"] = round($subTotal, 2);
 		$_SESSION["NormalShipCharge"] = 5.00;	
@@ -108,7 +108,7 @@ if (isset($_SESSION["Cart"])) {
 			// echo "<p style='text-align:right; font-size: 20px'> 
 		 	// Your subtotal exceeds $200! You quality for free express shipping!";
 
-			echo "<p style='text-align:right; font-size: 20px'> 
+			echo "<p style='text-align:right; font-size: 18px'> 
 		 	Express Delivery Charge = S$". number_format($_SESSION["ExpressShipCharge"], 2);
 		}
 
@@ -116,14 +116,14 @@ if (isset($_SESSION["Cart"])) {
 		else {
 			$_SESSION["ExpressShipCharge"] = 10;
 
-			echo "<p style='text-align:right; font-size: 20px'> 
+			echo "<p style='text-align:right; font-size: 18px'> 
 			Normal Delivery Charge = S$".number_format($_SESSION["NormalShipCharge"], 2);
 
-			echo "<p style='text-align:right; font-size: 20px'> 
+			echo "<p style='text-align:right; font-size: 18px'> 
 		 	Express Delivery Charge = S$". number_format($_SESSION["ExpressShipCharge"], 2);
 		}
 
-		echo "<p style='text-align:right; font-size: 20px'> 
+		echo "<p style='text-align:right; font-size: 18px'> 
 			  Total Quantity = ". number_format($quantity);
 
 		// To Do 7 (Practical 5):

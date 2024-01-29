@@ -33,7 +33,7 @@ if(isset($_SESSION["ShopperName"])) {
     <div class="container-fluid">
         <!-- Dynamic Text Display -->
         <span class="navbar-text ms-md-2"
-          style="color:#e0be23; max-width: 80%;">
+          style="color:#ff911b; max-width: 80%;">
            <?php echo $content1; ?>
         </span>
         <!-- Toggler/Collapsible Button -->
