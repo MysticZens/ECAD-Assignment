@@ -4,7 +4,7 @@ include("header.php"); // Include the Page Layout header
 ?>
 
 <!-- HTML Form to collect search keyword and submit it to the same page in server -->
-<div style="width:80%; margin:auto;"> <!-- Container -->
+<div style="width:50%; margin:auto;"> <!-- Container -->
 <form name="frmSearch" method="get" action="">
     <div class="mb-3 row"> <!-- 1st row -->
         <div class="col-sm-9 offset-sm-3">
