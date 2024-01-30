@@ -118,7 +118,7 @@ function authenticateForm()
          New Password:</label>
         <div class="col-sm-9">
             <input class="form-control" name="pwd1" id="pwd1" 
-                   type="password" maxlength="50" value="<?php echo $pwd; ?>" required />
+                   type="password" maxlength="50" required />
         </div>
     </div>
     <div class="mb-3 row">
