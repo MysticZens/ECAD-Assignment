@@ -10,6 +10,7 @@
 <script src="js/bootstrap.bundle.min.js"></script>
 <!-- Site specific Cascading Stylesheet -->
 <link rel="stylesheet" href="css/style.css"> 
+<link rel="icon" href="Images/Icon.png" type="image/png">
 <script src="https://kit.fontawesome.com/228bce7a14.js" crossorigin="anonymous"></script>
 </head>
 
