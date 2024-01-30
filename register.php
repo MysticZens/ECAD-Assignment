@@ -79,7 +79,8 @@ function validateForm()
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label" for="phone">Phone:</label>
         <div class="col-sm-9">
-            <input class="form-control" name="phone" id="phone" type="text" maxlength="20" />
+            <input class="form-control" name="phone" id="phone" type="text" maxlength="20" 
+                   placeholder="Allow only Singapore registered phone numbers."  />
         </div>
     </div>
     <div class="mb-3 row">
@@ -111,7 +112,8 @@ function validateForm()
             Password Question:</label>
         <div class="col-sm-9">
             <input class="form-control" name="pwdQuestion" id="pwdQuestion" 
-                   type="text" maxlength="100" />        
+                   type="text" maxlength="100" placeholder="Please enter the security password question!" /> 
+                   (Enter this security password question only once)       
         </div>
     </div>
     <div class="mb-3 row">
@@ -119,7 +121,8 @@ function validateForm()
             Password Answer:</label>
         <div class="col-sm-9">
             <input class="form-control" name="pwdAnswer" id="pwdAnswer" 
-                   type="text" maxlength="50" />        
+                   type="text" maxlength="50" placeholder="Please enter the security password answer!"/> 
+                   (Enter this security password answer only once)       
         </div>
     </div>
     <div class="mb-3 row">       
