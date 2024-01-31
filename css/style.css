@@ -77,3 +77,65 @@ body {
 .rating .fa-star:hover {
   transform: scale(1.1);
 }
+
+.sub-menu-wrap{
+  z-index: 2;
+  width: 150px;
+  position: absolute;
+  margin-top: -2%;
+  right: 17.5%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s;
+}
+/* Increases the max-height which will allow the dropdown menu to show itself */
+.sub-menu-wrap.open-menu{
+  z-index: 4;
+  max-height: 300px;
+}
+/* Giving the dropdown menu a backgroud color, padding and margin */
+.sub-menu{
+  background-color: rgba(4, 4, 58, 0.7);
+  padding: 20px;
+  margin: 10px;
+}
+/* Styling of links in the drop down menu */
+.sub-menu-link{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  margin: 12px 0;
+}
+/* Giving width to the text in dropdown menu */
+.sub-menu-link p{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  transform: translateX(0);
+  transition: 0.3s;
+}
+/* Giving an animation of 5px difference when a mouse hovers over the text  */
+.sub-menu-link:hover p{
+  cursor: pointer;
+  font-weight: bolder;
+  color: yellow;
+  transform: translateX(5px);
+}
+/* end dropdown */
+/* Animation */
+.animation {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
