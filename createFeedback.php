@@ -8,9 +8,20 @@ if (!isset($_SESSION["ShopperID"])) {
 include_once("mysql_conn.php");
 $currentDateTime = date('Y-m-d'); 
 ?>
+<script>
+function validateForm()
+{
+    if (document.feedback.rating.value == "" || document.feedback.rating.value == null) 
+    {
+        alert("Please click at least a star rated from 1 star to 5 stars!");
+        return false;
+    }
+    return true;
+}
+</script>
 <!-- Create a cenrally located container -->
 <div style="width:50%; margin:auto;">
-<form method="post" name="feedback">
+<form method="post" name="feedback" onsubmit="return validateForm()">
     <div class="mb-3 row">
         <div class="col-sm-9 offset-sm-3">
             <span class="page-title">Add Feedback</span>
@@ -34,7 +45,7 @@ $currentDateTime = date('Y-m-d');
         <label class="col-sm-3 col-form-label" for="rating">Rating:</label>
         <div class="col-sm-9">
             <div class="col-form-label rating">
-                <input type="number" name="rating" id="rating" min='1' max='5' style="display: none;" required />
+                <input type="number" name="rating" id="rating" min='1' max='5' style="display: none;" />
                 <i class="fa-regular fa-star" style="--i: 0; font-size: 30px;"></i>
                 <i class="fa-regular fa-star" style="--i: 1; font-size: 30px;"></i>
                 <i class="fa-regular fa-star" style="--i: 2; font-size: 30px;"></i>
