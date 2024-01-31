@@ -8,6 +8,47 @@ if (!isset($_SESSION["ShopperID"])) {
 include_once("mysql_conn.php");
 $currentDateTime = date('Y-m-d'); 
 ?>
+<!-- Create a cenrally located container -->
+<div style="width:50%; margin:auto;">
+<form method="post" name="feedback">
+    <div class="mb-3 row">
+        <div class="col-sm-9 offset-sm-3">
+            <span class="page-title">Add Feedback</span>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="subject">Subject:</label>
+        <div class="col-sm-9">
+            <textarea class="form-control" name="subject" id="subject" 
+                   type="text" cols="25" rows="4" maxlength="255"></textarea>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="content">Content:</label>
+        <div class="col-sm-9">
+        <textarea class="form-control" name="content" id="content"
+                      cols="25" rows="4"></textarea>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label" for="rating">Rating:</label>
+        <div class="col-sm-9">
+            <div class="col-form-label rating">
+                <input type="number" name="rating" id="rating" min='1' max='5' style="display: none;" required />
+                <i class="fa-regular fa-star" style="--i: 0; font-size: 30px;"></i>
+                <i class="fa-regular fa-star" style="--i: 1; font-size: 30px;"></i>
+                <i class="fa-regular fa-star" style="--i: 2; font-size: 30px;"></i>
+                <i class="fa-regular fa-star" style="--i: 3; font-size: 30px;"></i>
+                <i class="fa-regular fa-star" style="--i: 4; font-size: 30px;"></i>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 row">       
+        <div class="col-sm-9 offset-sm-3">
+            <br /><button class="submitbutton" type="submit">Submit</button>
+        </div>
+    </div>
+</form>
 <script>
 // Selecting the stars
 const allStar = document.querySelectorAll('.rating .fa-star');
@@ -36,48 +77,6 @@ allStar.forEach((item, idx)=> {
     })
 })
 </script>
-<!-- Create a cenrally located container -->
-<div style="width:50%; margin:auto;">
-<form method="post" name="feedback">
-    <div class="mb-3 row">
-        <div class="col-sm-9 offset-sm-3">
-            <span class="page-title">Add Feedback</span>
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="subject">Subject:</label>
-        <div class="col-sm-9">
-            <textarea class="form-control" name="subject" id="subject" 
-                   type="text" cols="25" rows="4" maxlength="255"></textarea>
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="content">Content:</label>
-        <div class="col-sm-9">
-        <textarea class="form-control" name="content" id="content"
-                      cols="25" rows="4"></textarea>
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="rating">Rating:</label>
-        <div class="col-sm-9">
-            <div class="col-form-label rating">
-                <input type="number" name="rating" id="rating" min='1' max='5' required />
-                <i class="fa-regular fa-star" style="--i: 0"></i>
-                <i class="fa-regular fa-star" style="--i: 1"></i>
-                <i class="fa-regular fa-star" style="--i: 2"></i>
-                <i class="fa-regular fa-star" style="--i: 3"></i>
-                <i class="fa-regular fa-star" style="--i: 4"></i>
-            </div>
-        </div>
-    </div>
-    <div class="mb-3 row">       
-        <div class="col-sm-9 offset-sm-3">
-            <br /><button class="submitbutton" type="submit">Submit</button>
-        </div>
-    </div>
-</form>
-
 <?php
 // Process after user click the submit button
 $checkSubmission = true;
