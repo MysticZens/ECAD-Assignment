@@ -31,7 +31,7 @@ body {
   width: 15%; /* Adjust icon width as needed */
   height: 30px; /* Adjust icon height as needed */
   color: black;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .submitbutton {
@@ -42,11 +42,37 @@ body {
 }
 
 .rating {
-	display: flex;
-	justify-content: left;
-	align-items: left;
-	grid-gap: .5rem;
-	color: yellow;
-	margin-bottom: 2rem;
+  display: flex;
+  justify-content: left;
+  align-items: start;
+  grid-gap: 0.5rem;
+  font-size: 1em;
+  color: #ffd700;
 }
 
+.rating .fa-star {
+  cursor: pointer;
+}
+.rating .fa-star.active {
+  opacity: 0;
+  animation: animate 0.5s calc(var(--i) * 0.1s) ease-in-out forwards;
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rating .fa-star:hover {
+  transform: scale(1.1);
+}
