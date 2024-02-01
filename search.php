@@ -41,7 +41,7 @@ include("header.php"); // Include the Page Layout header
 
         <div class="mb-3 row"> <!-- 5th row -->
             <div class="col-sm-12 text-center">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button class="submitbutton" type="submit" class="btn btn-primary">Search</button>
             </div>
         </div> <!-- End of 5th row -->
     </form>
@@ -92,7 +92,7 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
 
             echo "<img src='$img' style='width: 300px; max-width: 200px;' />";
             echo "<div style='padding: 3%; margin-bottom: 20px;'>";
-            echo "<h3><a style='text-decoration:none' href='$productDetailsLink'>$row[ProductTitle]</a></h3>";
+            echo "<h3><a style='text-decoration:none; color: red' href='$productDetailsLink'>$row[ProductTitle]</a></h3>";
             echo "<p><strong>Description:</strong> $row[ProductDesc]</p>";
         
             // Displaying discounted price with strike-through for the original price
