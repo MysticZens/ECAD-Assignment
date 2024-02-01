@@ -4,7 +4,7 @@ include("header.php"); // Include the Page Layout header
 ?>
 
 <!-- HTML Form to collect search keyword and submit it to the same page in server -->
-<<<<<<< HEAD
+
 <div style="width: 80%; margin: auto;"> <!-- Container -->
     <form name="frmSearch" method="get" action="">
         <div class="mb-3 row text-center"> <!-- 1st row -->
@@ -18,13 +18,6 @@ include("header.php"); // Include the Page Layout header
             <div class="col-sm-6">
                 <input class="form-control" name="keywords" id="keywords" type="search" />
             </div>
-=======
-<div style="width:50%; margin:auto;"> <!-- Container -->
-<form name="frmSearch" method="get" action="">
-    <div class="mb-3 row"> <!-- 1st row -->
-        <div class="col-sm-9 offset-sm-3">
-            <span class="page-title">Product Search</span>
->>>>>>> 5b6c4664537fbed54b7528d337863ea55524a247
         </div>
 
         <div class="mb-3 row"> <!-- 3rd row -->
@@ -45,7 +38,6 @@ include("header.php"); // Include the Page Layout header
                 <input class="form-control" name="keywords2" id="keywords2" type="number" placeholder="Max Price" />
             </div>
         </div>
-<<<<<<< HEAD
 
         <div class="mb-3 row"> <!-- 5th row -->
             <div class="col-sm-12 text-center">
@@ -54,32 +46,6 @@ include("header.php"); // Include the Page Layout header
         </div> <!-- End of 5th row -->
     </form>
 </div>
-
-=======
-    </div>
-    <div class="mb-3 row"> <!-- 2nd row -->
-        <label for="keywords2" 
-               class="col-sm-3 col-form-label">Max Price:</label>
-        <div class="col-sm-6">
-            <input class="form-control" name="keywords2" id="keywords2" 
-                   type="number" />
-        </div>
-    </div>
-    <div class="mb-3 row"> <!-- 2nd row -->
-        <label for="keywords3" 
-               class="col-sm-3 col-form-label">Min Price:</label>
-        <div class="col-sm-6">
-            <input class="form-control" name="keywords3" id="keywords3" 
-                   type="number" />
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <div class="col-sm-3">
-            <button class="submitbutton" type="submit">Search</button>
-        </div>
-    </div>  <!-- End of 2nd row -->
-</form>
->>>>>>> 5b6c4664537fbed54b7528d337863ea55524a247
 
 <?php
 
@@ -99,8 +65,8 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
     $result2 = $_GET["keywords2"];
     $keywords3 = intval($_GET["keywords3"]);  // Convert to integer
     $result3 = $_GET["keywords3"];
-    echo "Search results for Title/Description : <b>" . $result . "</b> Occasion : <b>" 
-    . $result1 ."</b> Max Price : $<b>" . $result2 ."</b>   Min Price : $<b>" . $result3 . "</br>";
+    echo "Search results for Title/Description : <b>" . $result . "</b>| Occasion : <b>" 
+    . $result1 ."</b>| Maximum Price : $<b>" . $result2 ."</b>| Minimum Price : $<b>" . $result3 . "</br>";
     
     $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductDesc, p.ProductImage, p.Offered, p.Price, p.OfferedPrice,
     CASE WHEN p.Offered = 1 THEN p.OfferedPrice ELSE p.Price END AS CurrentPrice,
