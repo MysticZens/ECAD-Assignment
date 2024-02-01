@@ -4,7 +4,7 @@ include("header.php"); // Include the Page Layout header
 include_once("mysql_conn.php");
 ?>
 
-<div class="table-responsive" style="width: 70%; margin: auto">
+<div class="table-responsive" style="width: 80%; margin: auto">
 	<div style="margin-bottom:20px;">
 		<a href="createFeedback.php"><button class="submitbutton">Review</button></a>
 		<form method="post" style="display: flex; align-items: center; float: right;">
