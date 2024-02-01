@@ -2,11 +2,11 @@
 session_start(); // Detect the current session
 include("header.php"); // Include the Page Layout header
 ?>
-<!-- Create a container, 60% width of viewport -->
+<!-- Create a container, 60% width of viewport, centered -->
 <div style="width:60%; margin:auto;">
     <!-- Display Page Header -->
     <div class="row" style="padding:5px"> <!-- Start of header row -->
-        <div class="col-12">
+        <div class="col-12 text-center">
             <span class="page-title">Product Categories</span>
             <p>Select a category listed below:</p>
         </div>
@@ -26,20 +26,20 @@ include("header.php"); // Include the Page Layout header
         //            display category's description in a new paragraph
         $catname = urlencode($row["CatName"]);
         $catproduct = "catProduct.php?cid=$row[CategoryID]&catName=$catname";
-        echo "<div class='col-8'>"; //67% of row width
+        echo "<div class='col-8 text-center'>"; // 67% of row width, centered
         echo "<p><a href=$catproduct>$row[CatName]</a></p>";
         echo "$row[CatDesc]";
         echo "</div>";
         // Right column - display the category's image
         $img = "./Images/category/$row[CatImage]";
-        echo "<div class='col-4'>"; //33% of row width 
+        echo "<div class='col-4 text-center'>"; // 33% of row width, centered
         echo "<img src='$img' />";
         echo "</div>";
         echo "</div>"; // End of a row
     }
     // To Do:  Ending ....
 
-    $conn->close(); // Close database connnection
-    echo "</div>"; // End of container
+    $conn->close(); // Close the database connection
+    echo "</div>"; // End of the container
     include("footer.php"); // Include the Page Layout footer
     ?>
