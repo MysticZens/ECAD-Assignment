@@ -26,8 +26,6 @@ $country = $row["Country"];
 $phone = substr($row["Phone"], 5);
 $email = $row["Email"];
 $pwd = $row["Password"];
-$pwdQuestion = $row["PwdQuestion"];
-$pwdAnswer = $row["PwdAnswer"];
 $currentDate = date('Y-m-d');
 $stmt->close();
 ?>
@@ -118,7 +116,7 @@ function authenticateForm()
          New Password:</label>
         <div class="col-sm-9">
             <input class="form-control" name="pwd1" id="pwd1" 
-                   type="password" maxlength="50" value="<?php echo $pwd; ?>" required />
+                   type="password" maxlength="50" required />
         </div>
     </div>
     <div class="mb-3 row">
@@ -127,22 +125,6 @@ function authenticateForm()
         <div class="col-sm-9">
             <input class="form-control" name="pwd2" id="pwd2"
                    type="password" maxlength="50" required />
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="passwordQuestion">
-            Password Question:</label>
-        <div class="col-sm-9">
-            <input class="form-control" name="passwordQuestion" id="passwordQuestion" 
-                   type="text" maxlength="100" value="<?php echo $pwdQuestion; ?>" />        
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="passwordAnswer">
-            Password Answer:</label>
-        <div class="col-sm-9">
-            <input class="form-control" name="passwordAnswer" id="passwordAnswer" 
-                   type="text" maxlength="50" value="<?php echo $pwdAnswer; ?>" />        
         </div>
     </div>
     <div class="mb-3 row">       
@@ -163,8 +145,6 @@ if (isset($_POST["pwd1"]) && isset($_POST["pwd2"]) && isset($_POST["username"]) 
     $telephone = "(65) ".$_POST["telephone"];
     $useremail = $_POST["userEmail"];
     $password = $_POST["pwd1"];
-    $passwordQuestion = $_POST["passwordQuestion"];
-    $passwordAnswer = $_POST["passwordAnswer"];
     $qry1 = "SELECT Email FROM shopper WHERE Email!=?";
     $statement = $conn->prepare($qry1);
     $statement->bind_param("s", $email);
@@ -179,9 +159,9 @@ if (isset($_POST["pwd1"]) && isset($_POST["pwd2"]) && isset($_POST["username"]) 
 
     if ($checkEmail) {
         $qry2 = "UPDATE shopper SET Name=?, BirthDate=?, Address=?, Country=?, Phone=?, Email=?, 
-                Password=?, PwdQuestion=?, PwdAnswer=? WHERE ShopperID=?";
+                Password=?, WHERE ShopperID=?";
         $stmt = $conn->prepare($qry2);
-        $stmt->bind_param("sssssssssi", $username, $userdob, $useraddress, $usercountry, $telephone, $useremail, $password, $passwordQuestion, $passwordAnswer, $shopperId);
+        $stmt->bind_param("sssssssi", $username, $userdob, $useraddress, $usercountry, $telephone, $useremail, $password, $shopperId);
         $stmt->execute(); 
         $stmt->close();   
         echo "<br />";

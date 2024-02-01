@@ -8,10 +8,20 @@ if (!isset($_SESSION["ShopperID"])) {
 include_once("mysql_conn.php");
 $currentDateTime = date('Y-m-d'); 
 ?>
-
+<script>
+function validateForm()
+{
+    if (document.feedback.rating.value == "" || document.feedback.rating.value == null) 
+    {
+        alert("Please click at least a star rated from 1 star to 5 stars!");
+        return false;
+    }
+    return true;
+}
+</script>
 <!-- Create a cenrally located container -->
 <div style="width:50%; margin:auto;">
-<form method="post">
+<form method="post" name="feedback" onsubmit="return validateForm()">
     <div class="mb-3 row">
         <div class="col-sm-9 offset-sm-3">
             <span class="page-title">Add Feedback</span>
@@ -20,8 +30,8 @@ $currentDateTime = date('Y-m-d');
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label" for="subject">Subject:</label>
         <div class="col-sm-9">
-            <input class="form-control" name="subject" id="subject" 
-                   type="text" maxlength="255" />
+            <textarea class="form-control" name="subject" id="subject" 
+                   type="text" cols="25" rows="4" maxlength="255"></textarea>
         </div>
     </div>
     <div class="mb-3 row">
@@ -35,44 +45,12 @@ $currentDateTime = date('Y-m-d');
         <label class="col-sm-3 col-form-label" for="rating">Rating:</label>
         <div class="col-sm-9">
             <div class="col-form-label rating">
-            <input type="radio" id="star" name="rating" value="1">
-            <label for="rating" title="1 star">
-            <?php 
-                echo "<i class='fa-solid fa-star' style='color: #ffe63b; padding: 0'></i>";
-            ?>
-            </label>
-            <input type="radio" id="star" name="rating" value="2">
-            <label for="rating" title="2 stars">
-            <?php
-                for ($i=0; $i<2; $i++) {
-                    echo "<i class='fa-solid fa-star' style='color: #ffe63b; margin: 0; padding: 0'></i>";
-                }
-            ?> 
-            </label>
-            <input type="radio" id="star" name="rating" value="3">
-            <label for="rating" title="3 stars">
-            <?php
-                for ($i=0; $i<3; $i++) {
-                    echo "<i class='fa-solid fa-star' style='color: #ffe63b; padding: 0'></i>";
-                }
-            ?> 
-            </label>
-            <input type="radio" id="star" name="rating" value="4">
-            <label for="rating" title="4 stars">
-            <?php
-                for ($i=0; $i<4; $i++) {
-                    echo "<i class='fa-solid fa-star' style='color: #ffe63b; margin: 0; padding: 0'></i>";
-                }
-            ?> 
-            </label>
-            <input type="radio" id="star" name="rating" value="5">
-            <label for="rating" title="5 stars">
-            <?php
-                for ($i=0; $i<5; $i++) {
-                    echo "<i class='fa-solid fa-star' style='color: #ffe63b; margin: 0; padding: 0'></i>";
-                }
-            ?> 
-            </label>
+                <input type="number" name="rating" id="rating" min='1' max='5' style="display: none;" />
+                <i class="fa-regular fa-star" style="--i: 0; font-size: 30px;"></i>
+                <i class="fa-regular fa-star" style="--i: 1; font-size: 30px;"></i>
+                <i class="fa-regular fa-star" style="--i: 2; font-size: 30px;"></i>
+                <i class="fa-regular fa-star" style="--i: 3; font-size: 30px;"></i>
+                <i class="fa-regular fa-star" style="--i: 4; font-size: 30px;"></i>
             </div>
         </div>
     </div>
@@ -82,7 +60,34 @@ $currentDateTime = date('Y-m-d');
         </div>
     </div>
 </form>
+<script>
+// Selecting the stars
+const allStar = document.querySelectorAll('.rating .fa-star');
 
+// Selecting the input
+const ratingValue = document.querySelector('.rating input');
+
+allStar.forEach((item, idx)=> {
+    item.addEventListener('click', function () {
+        let click = 0;
+        ratingValue.value = idx + 1;
+
+        allStar.forEach(i=> {
+            i.classList.replace("fa-solid", "fa-regular");
+            i.classList.remove('active');
+        });
+        for(let i=0; i<allStar.length; i++) {
+            if(i <= idx) {
+                allStar[i].classList.replace("fa-regular", "fa-solid");
+                allStar[i].classList.add('active');
+            } else {
+                allStar[i].style.setProperty('--i', click);
+                click++;
+            }
+        }
+    })
+})
+</script>
 <?php
 // Process after user click the submit button
 $checkSubmission = true;
