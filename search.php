@@ -4,55 +4,53 @@ include("header.php"); // Include the Page Layout header
 ?>
 
 <!-- HTML Form to collect search keyword and submit it to the same page in server -->
-<div style="width:80%; margin:auto;"> <!-- Container -->
-<form name="frmSearch" method="get" action="">
-    <div class="mb-3 row"> <!-- 1st row -->
-        <div class="col-sm-9 offset-sm-3">
-            <span class="page-title">Product Search</span>
+<div style="width: 80%; margin: auto;"> <!-- Container -->
+    <form name="frmSearch" method="get" action="">
+        <div class="mb-3 row text-center"> <!-- 1st row -->
+            <div class="col-sm-12">
+                <h2 class="page-title">Product Search</h2>
+            </div>
+        </div> <!-- End of 1st row -->
+
+        <div class="mb-3 row"> <!-- 2nd row -->
+            <label for="keywords" class="col-sm-3 col-form-label text-end">Product Title:</label>
+            <div class="col-sm-6">
+                <input class="form-control" name="keywords" id="keywords" type="search" />
+            </div>
         </div>
-    </div> <!-- End of 1st row -->
-    <div class="mb-3 row"> <!-- 2nd row -->
-        <label for="keywords" 
-               class="col-sm-3 col-form-label">Product Title:</label>
-        <div class="col-sm-6">
-            <input class="form-control" name="keywords" id="keywords" 
-                   type="search" />
+
+        <div class="mb-3 row"> <!-- 3rd row -->
+            <label for="keywords1" class="col-sm-3 col-form-label text-end">Occasion:</label>
+            <div class="col-sm-6">
+                <input class="form-control" name="keywords1" id="keywords1" type="search" />
+            </div>
         </div>
-    </div>
-    <div class="mb-3 row"> <!-- 2nd row -->
-        <label for="keywords1" 
-               class="col-sm-3 col-form-label">Occasion:</label>
-        <div class="col-sm-6">
-            <input class="form-control" name="keywords1" id="keywords1" 
-                   type="search" />
+
+        <div class="mb-3 row"> <!-- 4th row -->
+            <div class="col-sm-3 col-form-label text-end">Price Range:</div>
+            <div class="col-sm-3">
+                <label for="keywords3" class="visually-hidden">Min Price:</label>
+                <input class="form-control" name="keywords3" id="keywords3" type="number" placeholder="Min Price" />
+            </div>
+            <div class="col-sm-3">
+                <label for="keywords2" class="visually-hidden">Max Price:</label>
+                <input class="form-control" name="keywords2" id="keywords2" type="number" placeholder="Max Price" />
+            </div>
         </div>
-    </div>
-    <div class="mb-3 row"> <!-- 2nd row -->
-        <label for="keywords2" 
-               class="col-sm-3 col-form-label">Max Price:</label>
-        <div class="col-sm-6">
-            <input class="form-control" name="keywords2" id="keywords2" 
-                   type="number" />
-        </div>
-    </div>
-    <div class="mb-3 row"> <!-- 2nd row -->
-        <label for="keywords3" 
-               class="col-sm-3 col-form-label">Min Price:</label>
-        <div class="col-sm-6">
-            <input class="form-control" name="keywords3" id="keywords3" 
-                   type="number" />
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <div class="col-sm-3">
-            <button type="submit">Search</button>
-        </div>
-    </div>  <!-- End of 2nd row -->
-</form>
+
+        <div class="mb-3 row"> <!-- 5th row -->
+            <div class="col-sm-12 text-center">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div> <!-- End of 5th row -->
+    </form>
+</div>
+
 
 <?php
 
 include_once("mysql_conn.php");
+echo "<div style='text-align: center;'>";
 // The non-empty search keyword is sent to server
 if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") & 
     (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
@@ -67,10 +65,10 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
     $result2 = $_GET["keywords2"];
     $keywords3 = intval($_GET["keywords3"]);  // Convert to integer
     $result3 = $_GET["keywords3"];
-    echo "Search results for Title/Description : <b>" . $result . "</b> Occasion :<b>" 
-    . $result1 ."</b> Max Price :<b>" . $result2 ."</b> Min Price :<b>" . $result3;
+    echo "Search results for Title/Description : <b>" . $result . "</b> Occasion : <b>" 
+    . $result1 ."</b> Max Price : $<b>" . $result2 ."</b>   Min Price : $<b>" . $result3 . "</br>";
     
-    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductDesc, 
+    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductDesc, p.ProductImage, p.Offered, p.Price, p.OfferedPrice,
     CASE WHEN p.Offered = 1 THEN p.OfferedPrice ELSE p.Price END AS CurrentPrice,
     ps.SpecVal, ps.SpecID 
     FROM product p 
@@ -89,8 +87,24 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
         // Output the results in a table
         echo "<table>";
         while ($row = mysqli_fetch_assoc($result)) {
-            $product = "productDetails.php?pid=$row[ProductID]";
-            echo "<tr><td><p><a style = 'text-decoration:none' href=$product>$row[ProductTitle]</a></p></td></tr>";
+            $productDetailsLink = "productDetails.php?pid=$row[ProductID]";
+            $img = "./Images/products/$row[ProductImage]";
+
+            echo "<img src='$img' style='width: 300px; max-width: 200px;' />";
+            echo "<div style='padding: 3%; margin-bottom: 20px;'>";
+            echo "<h3><a style='text-decoration:none' href='$productDetailsLink'>$row[ProductTitle]</a></h3>";
+            echo "<p><strong>Description:</strong> $row[ProductDesc]</p>";
+        
+            // Displaying discounted price with strike-through for the original price
+            if ($row['Offered'] == 1) {
+                echo "<p><strong>Original Price </strong> <del>$$row[Price]</del></p>";
+                echo "<p style='color:red;'><b>NOW</b> <strong>$$row[OfferedPrice]</strong></p>";
+            } else {
+                echo "<p><strong>Price</strong> $$row[Price]</p>";
+            }
+        
+            echo "<p><strong>Specification Value:</strong> $row[SpecVal]</p>";
+            echo "</div>";
         }
         echo "</table>";
     } else {
