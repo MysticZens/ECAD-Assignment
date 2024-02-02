@@ -41,7 +41,7 @@ include("header.php"); // Include the Page Layout header
 
         <div class="mb-3 row"> <!-- 5th row -->
             <div class="col-sm-12 text-center">
-                <button class="submitbutton" type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </div> <!-- End of 5th row -->
     </form>
@@ -51,12 +51,12 @@ include("header.php"); // Include the Page Layout header
 
 include_once("mysql_conn.php");
 echo "<div style='text-align: center;'>";
-// The non-empty search keyword is sent to server
+// EVERYTHING
 if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") & 
     (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
     (isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
     (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")){
-    // Retrieve list of product records with "ProductTitle" 
+    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
     $keywords = '%' . $_GET["keywords"] . '%';
     $result = $_GET["keywords"];
     $keywords1 = '%' . $_GET["keywords1"] . '%';
@@ -75,7 +75,7 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
     INNER JOIN productspec ps ON p.ProductID = ps.ProductID
     WHERE (p.ProductTitle LIKE '%$keywords%' OR p.ProductDesc LIKE '%$keywords%') 
     AND ps.SpecID = 1
-    AND (ps.SpecVal LIKE '%$keywords1%' OR p.ProductDesc LIKE '%$keywords1%')
+    AND (ps.SpecVal LIKE '%$keywords1%')
     AND ((p.Offered = 1 AND p.OfferedPrice <= $keywords2) OR (p.Offered = 0 AND p.Price <= $keywords2))
     AND ((p.Offered = 1 AND p.OfferedPrice >= $keywords3) OR (p.Offered = 0 AND p.Price >= $keywords3))
     ORDER BY ProductTitle";
@@ -92,7 +92,7 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
 
             echo "<img src='$img' style='width: 300px; max-width: 200px;' />";
             echo "<div style='padding: 3%; margin-bottom: 20px;'>";
-            echo "<h3><a style='text-decoration:none; color: red' href='$productDetailsLink'>$row[ProductTitle]</a></h3>";
+            echo "<h3><a style='text-decoration:none' href='$productDetailsLink'>$row[ProductTitle]</a></h3>";
             echo "<p><strong>Description:</strong> $row[ProductDesc]</p>";
         
             // Displaying discounted price with strike-through for the original price
@@ -111,11 +111,137 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
         echo "<br />";
         echo "<span style = color:red>No products found.</span>";
     }
+	// To Do (DIY): End of Code
 }
-else {
-    echo "<br />";
-    echo "<span>Please Enter Values into all the Fields!</span>";
+// PRODUCT TITLE / DESC ONLY
+else if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
+    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+    $keywords = '%' . $_GET["keywords"] . '%';
+    $result = $_GET["keywords"];
+    echo "Search results for Product Title/Description <b>" . $result . "</b>: </br>";
+    
+    $qry = "SELECT ProductID, ProductTitle, ProductDesc, ProductImage, Offered, Price, OfferedPrice
+    FROM product WHERE ProductTitle 
+    LIKE '%$keywords%' OR ProductDesc LIKE '%$keywords%' ORDER BY ProductTitle";
+ 
+    $result = mysqli_query($conn, $qry);
+
+    if (mysqli_num_rows($result) > 0) {     
+        // Output the results in a table
+        echo "<table>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            $productDetailsLink = "productDetails.php?pid=$row[ProductID]";
+            $img = "./Images/products/$row[ProductImage]";
+
+            echo "<img src='$img' style='width: 300px; max-width: 200px;' />";
+            echo "<div style='padding: 3%; margin-bottom: 20px;'>";
+            echo "<h3><a style='text-decoration:none' href='$productDetailsLink'>$row[ProductTitle]</a></h3>";
+            echo "<p><strong>Description:</strong> $row[ProductDesc]</p>";
+        
+            // Displaying discounted price with strike-through for the original price
+            if ($row['Offered'] == 1) {
+                echo "<p><strong>Original Price </strong> <del>$$row[Price]</del></p>";
+                echo "<p style='color:red;'><b>NOW</b> <strong>$$row[OfferedPrice]</strong></p>";
+            } else {
+                echo "<p><strong>Price</strong> $$row[Price]</p>";
+            }
+        }
+        echo "</table>";
+    } else {
+        echo "<br />";
+        echo "<span style = color:red>No products found.</span>";
+    }
 }
+// OCCASION ONLY
+else if (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") {
+    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+    $keywords1 = '%' . $_GET["keywords1"] . '%';
+    $result1 = $_GET["keywords1"];
+    echo "Search results for Occasion <b>" . $result1 . "</b>: </br>";
+    
+    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductDesc, p.ProductImage, p.Offered, p.Price, p.OfferedPrice,
+    CASE WHEN p.Offered = 1 THEN p.OfferedPrice ELSE p.Price END AS CurrentPrice,
+    ps.SpecVal, ps.SpecID 
+    FROM product p 
+    INNER JOIN productspec ps ON p.ProductID = ps.ProductID
+    WHERE ps.SpecID = 1
+    AND (ps.SpecVal LIKE '%$keywords1%')
+    ORDER BY ProductTitle";
+ 
+    $result = mysqli_query($conn, $qry);
+
+    if (mysqli_num_rows($result) > 0) {     
+        // Output the results in a table
+        echo "<table>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            $productDetailsLink = "productDetails.php?pid=$row[ProductID]";
+            $img = "./Images/products/$row[ProductImage]";
+
+            echo "<img src='$img' style='width: 300px; max-width: 200px;' />";
+            echo "<div style='padding: 3%; margin-bottom: 20px;'>";
+            echo "<h3><a style='text-decoration:none' href='$productDetailsLink'>$row[ProductTitle]</a></h3>";
+            echo "<p><strong>Description:</strong> $row[ProductDesc]</p>";
+        
+            // Displaying discounted price with strike-through for the original price
+            if ($row['Offered'] == 1) {
+                echo "<p><strong>Original Price </strong> <del>$$row[Price]</del></p>";
+                echo "<p style='color:red;'><b>NOW</b> <strong>$$row[OfferedPrice]</strong></p>";
+            } else {
+                echo "<p><strong>Price</strong> $$row[Price]</p>";
+            }
+        }
+        echo "</table>";
+    } else {
+        echo "<br />";
+        echo "<span style = color:red>No products found.</span>";
+    }
+}
+// RANGE ONLY
+else if ((isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
+        (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")) {
+    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+    $keywords2 = intval($_GET["keywords2"]);  // Convert to integer
+    $result2 = $_GET["keywords2"];
+    $keywords3 = intval($_GET["keywords3"]);  // Convert to integer
+    $result3 = $_GET["keywords3"];
+    echo "Search results for Range of <b>" . $result3 . "</b>->" . $result2 . "</br>";
+    
+    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductDesc, p.ProductImage, p.Offered, p.Price, p.OfferedPrice,
+    CASE WHEN p.Offered = 1 THEN p.OfferedPrice ELSE p.Price END AS CurrentPrice
+    FROM product p 
+    WHERE ((p.Offered = 1 AND p.OfferedPrice <= $keywords2) OR (p.Offered = 0 AND p.Price <= $keywords2))
+    AND ((p.Offered = 1 AND p.OfferedPrice >= $keywords3) OR (p.Offered = 0 AND p.Price >= $keywords3))
+    ORDER BY ProductTitle";
+ 
+    $result = mysqli_query($conn, $qry);
+
+    if (mysqli_num_rows($result) > 0) {     
+        // Output the results in a table
+        echo "<table>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            $productDetailsLink = "productDetails.php?pid=$row[ProductID]";
+            $img = "./Images/products/$row[ProductImage]";
+
+            echo "<img src='$img' style='width: 300px; max-width: 200px;' />";
+            echo "<div style='padding: 3%; margin-bottom: 20px;'>";
+            echo "<h3><a style='text-decoration:none' href='$productDetailsLink'>$row[ProductTitle]</a></h3>";
+            echo "<p><strong>Description:</strong> $row[ProductDesc]</p>";
+        
+            // Displaying discounted price with strike-through for the original price
+            if ($row['Offered'] == 1) {
+                echo "<p><strong>Original Price </strong> <del>$$row[Price]</del></p>";
+                echo "<p style='color:red;'><b>NOW</b> <strong>$$row[OfferedPrice]</strong></p>";
+            } else {
+                echo "<p><strong>Price</strong> $$row[Price]</p>";
+            }
+        }
+        echo "</table>";
+    } else {
+        echo "<br />";
+        echo "<span style = color:red>No products found.</span>";
+    }
+}
+
 
 echo "</div>"; // End of container
 include("footer.php"); // Include the Page Layout footer
