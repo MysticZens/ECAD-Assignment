@@ -13,7 +13,6 @@ if (! isset($_SESSION["ShopperID"])) { // Check if user logged in
 echo "<div id='myShopCart' style='margin:auto; text-align:center'>"; // Start a container
 if (isset($_SESSION["Cart"])) {
 	include_once("mysql_conn.php");
-	// To Do 1 (Practical 4): 
 	// Retrieve from database and display shopping cart in a table
 	
     $qry = "SELECT *, (Price*Quantity) AS Total 
@@ -25,7 +24,7 @@ if (isset($_SESSION["Cart"])) {
 	$stmt->close();
 	
 	if ($result->num_rows > 0) {
-		// To Do 2 (Practical 4): Format and display
+		// Format and display
 		// the page header and header row of shopping cart page
 		echo "<p class='page-title' style='text-align:center'>Shopping Cart</p>"; 
 		echo "<div class='table-responsive'>"; // Bootstrap responsive table
@@ -39,10 +38,8 @@ if (isset($_SESSION["Cart"])) {
 		echo "<th style='background-color:#ff3f3f; color:white'>&nbsp;</th>";
 		echo "</tr>"; // End of header row
 		echo "</thead>"; // End of table's header section
-		// To Do 5 (Practical 5):
 		// Declare an array to store the shopping cart items in session variable 
 		$_SESSION["Items"]=array();
-		// To Do 3 (Practical 4): 
 		// Display the shopping cart content
 		$subTotal = 0; // Declare a variable to compute subtotal before tax
 		$quantity = 0;
@@ -80,7 +77,6 @@ if (isset($_SESSION["Cart"])) {
 			echo "</form>";
 			echo "</td>";
 			echo "</tr>";
-			// To Do 6 (Practical 5):
 		    // Store the shopping cart items in session variable as an associate array
 			$_SESSION["Items"][] = array("productId" => $row["ProductID"],
 										"name" => $row["Name"],
@@ -93,8 +89,7 @@ if (isset($_SESSION["Cart"])) {
 		echo "</tbody>"; // End of table's body section
 		echo "</table>"; // End of table
 		echo "</div>"; // End of Bootstrap responsive table
-				
-		// To Do 4 (Practical 4): 
+
 		// Display the subtotal at the end of the shopping cart
 		//echo "<p style='text-align:center; font-size: 18px'> 
 		echo "<br>";
@@ -126,9 +121,8 @@ if (isset($_SESSION["Cart"])) {
 		}
 
 		echo "<p style='text-align:right; font-size: 18px; width:94%'> 
-			  Total Quantity = ". number_format($quantity);
+		Total Quantity = ". number_format($quantity);
 
-		// To Do 7 (Practical 5):
 		// Add PayPal Checkout button on the shopping cart page
 		echo "<form method='post' action=' checkoutProcess.php'>"; 
 		echo "<input type='image' style='float:right; margin-right:5.5%'
