@@ -159,7 +159,8 @@ if (isset($_POST["pwd1"]) && isset($_POST["pwd2"]) && isset($_POST["username"]) 
 
     if ($checkEmail) {
         $qry2 = "UPDATE shopper SET Name=?, BirthDate=?, Address=?, Country=?, Phone=?, Email=?, 
-                Password=?, WHERE ShopperID=?";
+                 Password=? 
+                 WHERE ShopperID=?";
         $stmt = $conn->prepare($qry2);
         $stmt->bind_param("sssssssi", $username, $userdob, $useraddress, $usercountry, $telephone, $useremail, $password, $shopperId);
         $stmt->execute(); 
