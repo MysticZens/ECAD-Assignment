@@ -21,8 +21,8 @@ function addItem() {
 		header ("Location: login.php");
 		exit;
 	}
-	// TO DO 1
-	// Write code to implement: if a user clicks on "Add to Cart" button, insert/update the 
+
+	// If a user clicks on "Add to Cart" button, insert/update the 
 	// database and also the session variable for counting number of items in shopping cart.
 	include_once("mysql_conn.php"); // Establish database connection handle: $conn
 	// Check if a shopping cart exist, if not create a new shopping cart
@@ -90,8 +90,8 @@ function updateItem() {
 		header ("Location: login.php");
 		exit;
 	}
-	// TO DO 2
-	// Write code to implement: if a user clicks on "Update" button, update the database
+
+	// If a user clicks on "Update" button, update the database
 	// and also the session variable for counting number of items in shopping cart.
 	$cartid = $_SESSION["Cart"];
 	$pid = $_POST["product_id"];
@@ -114,8 +114,8 @@ function removeItem() {
 		header ("Location: login.php");
 		exit;
 	}
-	// TO DO 3
-	// Write code to implement: if a user clicks on "Remove" button, update the database
+
+	// If a user clicks on "Remove" button, update the database
 	// and also the session variable for counting number of items in shopping cart.
 	$cartid = $_SESSION["Cart"];
 	$pid = $_POST["product_id"];
