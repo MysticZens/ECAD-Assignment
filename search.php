@@ -56,7 +56,7 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
     (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
     (isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
     (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")){
-    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+    // Retrieve list of product records with "ProductTitle" 
     $keywords = '%' . $_GET["keywords"] . '%';
     $result = $_GET["keywords"];
     $keywords1 = '%' . $_GET["keywords1"] . '%';
@@ -111,7 +111,6 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
         echo "<br />";
         echo "<span style = color:red>No products found.</span>";
     }
-	// To Do (DIY): End of Code
 }
 else {
     echo "<br />";
