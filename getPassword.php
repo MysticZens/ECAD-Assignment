@@ -81,7 +81,7 @@ if (isset($_POST["passwordAnswer"])) {
 		$stmt->bind_param("si", $new_pwd, $shopperId);
 		$stmt->execute();
 		$stmt->close();
-        // To Do 2: e-Mail the new password to user
+        // e-Mail the new password to user
 		include("myMail.php");
 		// The "Send To" should be the e-mail address indicated
 		// by shopper, i.e $eMail. In this case, use a testing e-mail 
@@ -113,7 +113,6 @@ if (isset($_POST["passwordAnswer"])) {
 			echo "<p><span style='color:red;'>
 				  Mailer Error: Cannot send E-mail Address!</span></p>";
 		}
-		// End of To Do 2
     }
     
     else {

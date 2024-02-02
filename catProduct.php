@@ -17,7 +17,6 @@ include("header.php"); // Include the Page Layout header
     // Include the PHP file that establishes the database connection handle: $conn
     include_once("mysql_conn.php");
 
-    // To Do:  Starting ....
     $cid = $_GET["cid"]; // Read Category ID from the query string
     // Form SQL to retrieve a list of products associated with the Category ID
     $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Quantity, p.Offered, p.OfferedPrice
@@ -54,7 +53,6 @@ include("header.php"); // Include the Page Layout header
         echo "</div>";
         echo "</div>"; // End of a row
     }
-    // To Do:  Ending ....
 
     $conn->close(); // Close the database connection
     echo "</div>"; // End of the container

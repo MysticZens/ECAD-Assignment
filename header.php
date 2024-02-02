@@ -33,7 +33,7 @@
         <!-- 3rd Row -->
         <div class="row">
             <div class="col-sm-12" style="padding:15px; ">
-            <!-- define customised content here -->
+            <!-- define customised content -->
             <!-- closing of this column and row is in footer.php -->
             </div>
         </div> <!-- Close the bootstrap container -->

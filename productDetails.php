@@ -17,7 +17,7 @@ include("header.php"); // Include the Page Layout header
     $result = $stmt->get_result();
     $stmt->close();
 
-    // To Do 1:  Display Product information. Starting ....
+    // Display Product information
     while ($row = $result->fetch_array()) {
         echo "<div class='row' >"; // Start a new row
         // Left column - display the product's name
@@ -62,7 +62,7 @@ include("header.php"); // Include the Page Layout header
                 $formattedPrice = number_format($row["Price"], 2);
                 echo "<span style='font-weight:bold; color:red;'>S$ $formattedPrice</span>";
             }
-            // To Do 2:  Create a Form for adding the product to the shopping cart. Starting ....
+            // Create a Form for adding the product to the shopping cart
             echo "<form action='cartFunctions.php' method='post'>";
             echo "<input type='hidden' name='action' value='add' />";
             echo "<input type='hidden' name='product_id' value='$pid' />";
@@ -75,11 +75,9 @@ include("header.php"); // Include the Page Layout header
                 echo "style='background-color: red; color: white;'>Add to Cart</button>";
             }
             echo "</form>";
-            // To Do 2:  Ending ....
         }
         echo "</div>"; // End of right column
         echo "</div>"; // End of row
-        // To Do 1:  Ending ....
     }
 
     $conn->close(); // Close the database connection

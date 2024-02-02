@@ -16,14 +16,13 @@ include("header.php"); // Include the Page Layout header
     // Include the PHP file that establishes database connection handle: $conn
     include_once("mysql_conn.php");
 
-    // To Do:  Starting ....
     $qry = "SELECT * FROM Category Order by CatName ASC"; // Form SQL to select all categories 
     $result = $conn->query($qry); // Execute the SQL and get the result
     // Display each category in a row
     while ($row = $result->fetch_array()) {
         echo "<div class='row' style='padding:5px'>"; // Start a new row
         // Left column display a text link showing the category's name, 
-        //            display category's description in a new paragraph
+        // display category's description in a new paragraph
         $catname = urlencode($row["CatName"]);
         $catproduct = "catProduct.php?cid=$row[CategoryID]&catName=$catname";
         echo "<div class='col-8 text-center'>"; // 67% of row width, centered
@@ -37,7 +36,6 @@ include("header.php"); // Include the Page Layout header
         echo "</div>";
         echo "</div>"; // End of a row
     }
-    // To Do:  Ending ....
 
     $conn->close(); // Close the database connection
     echo "</div>"; // End of the container

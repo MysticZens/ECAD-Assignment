@@ -6,7 +6,7 @@ session_start();
 $email = $_POST["email"];
 $pwd = $_POST["password"];
 
-// To Do 1 (Practical 2): Validate login credentials with database
+// Validate login credentials with database
 // Include the PHP file that establishes database connection handle: $conn 
 include_once("mysql_conn.php");
 $qry = "SELECT * FROM Shopper WHERE Email=? AND Password=?";
