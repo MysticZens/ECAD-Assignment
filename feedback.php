@@ -23,11 +23,11 @@ include_once("mysql_conn.php");
     <table class="table table-striped table-bordered" style="white-space:nowrap;">
     <thead class="table" style="text-align: center;">
 		<tr>
-			<th style="background-color: red; color: white;">Shopper's Name</th>
-			<th style="background-color: red; color: white;">Subject</th>
-			<th style="background-color: red; color: white;">Content</th>
-			<th style="background-color: red; color: white;">Rating</th>
-			<th style="background-color: red; color: white;">Date Created</th>
+			<th style="background-color: #ff3f3f; color: white;">Shopper's Name</th>
+			<th style="background-color: #ff3f3f; color: white;">Subject</th>
+			<th style="background-color: #ff3f3f; color: white;">Content</th>
+			<th style="background-color: #ff3f3f; color: white;">Rating</th>
+			<th style="background-color: #ff3f3f; color: white;">Date Created</th>
 		</tr>
 	</thead>
 	<tbody class="table">
