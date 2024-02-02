@@ -5,7 +5,6 @@ include("header.php"); // Include the Page Layout header
 // Include the PHP file that establishes database connection handle: $conn 
 include_once("mysql_conn.php");
 
-// To Do 1: Check if user logged in 
 if (!isset($_SESSION["ShopperID"])) {
     header("Location: login.php");
     exit();
