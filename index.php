@@ -41,10 +41,15 @@ include("header.php");
                     while ($row = $result->fetch_array()) {
                          // Calculate the discount percentage
                          $discount = 100 - ($row["OfferedPrice"] / $row["Price"]) * 100;
-
+                    
                          // Construct the image path
                          $img = "./Images/products/$row[ProductImage]";
-
+                         
+                         // Display the price information
+                         $formattedPrice = number_format($row["Price"], 2);
+                         $formattedPrice2 = number_format($row["OfferedPrice"], 2);
+                         $formattedDiscount = number_format($discount, 1);
+                         
                          // Display the product details in a card
                          echo "<div class='card mb-3 container text-center' style='max-width: 540px; '>";
                          echo "<div class='row g-0'>";
