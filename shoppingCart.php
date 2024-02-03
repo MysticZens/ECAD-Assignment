@@ -100,49 +100,35 @@ if (isset($_SESSION["Cart"])) {
         $_SESSION["SubTotal"] = round($subTotal, 2);
 
         if ($_SESSION["SubTotal"] > 200) {
-            // Waive the delivery charge for orders over S$200
-            $_SESSION["ShipCharge"] = 0;
-            echo "<p style='text-align:right; font-size: 18px; width:94%; color:green;'>Congratulations! You qualify for free express delivery!";
-        } else {
-            // Calculate delivery charge based on the chosen delivery mode
-            if (isset($_POST['deliveryMode'])) {
-                $deliveryMode = $_POST['deliveryMode'];
-                if ($deliveryMode == 'Express') {
-                    $_SESSION["ShipCharge"] = $_SESSION["ExpressShipCharge"];
-                } else {
-                    $_SESSION["ShipCharge"] = $_SESSION["NormalShipCharge"];
-                }
-            }
-
-            // Allow the user to choose their preferred delivery mode
-            echo "<p style='text-align:right; font-size: 18px; width:94%'>Choose Delivery Mode:";
-            echo "<div style='text-align:right; margin-right: 5.5%; width:94%'>";
-            echo "<form method='post' action='checkoutProcess.php'>";
-            if ($_SESSION["SubTotal"] > 200) {
-                echo "<input type='hidden' name='deliveryMode' value='Express'>"; // Automatically select express delivery for them
-            } else {
-                // Display the dropdown for choosing delivery mode
-                echo "<select name='deliveryMode' id='deliveryMode'>";
-                echo "<option value='Normal'>Normal Delivery (\$5)</option>";
-                echo "<option value='Express'>Express Delivery (\$10)</option>";
-                echo "</select>";
-            }
-            echo "<input type='image' style='float:right; margin-right:5.5%' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'>";
-            echo "</form></div>";
-            echo "<br>";
-            echo "<br>";
-            echo "<br>";
+            echo "<p style='text-align:right; font-size: 18px; width:94%; color:green;'>Congratulations! You qualify for free express delivery!</p>";
         }
+
+        // Display a form for delivery mode selection and PayPal checkout button
+        echo "<form method='post' action='Checkoutprocess.php'>"; // This action should point to your script that initiates the PayPal checkout
+        echo "<div style='text-align:right; margin-right: 5.5%; width:94%'>";
+        if ($_SESSION["SubTotal"] <= 200) {
+            // Offer delivery mode choice only if subtotal is <= 200
+            echo "Choose Delivery Mode: ";
+            echo "<select name='deliveryMode' id='deliveryMode'>";
+            echo "<option value='Normal'>Normal Delivery (\$5)</option>";
+            echo "<option value='Express'>Express Delivery (\$10)</option>";
+            echo "</select><br>";
+        }
+        // Hidden inputs to pass along the subtotal and any other required data
+        echo "<input type='hidden' name='subtotal' value='" . $_SESSION["SubTotal"] . "'>";
+        // PayPal checkout button
+        echo "<input type='image' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'>";
+        echo "</div>";
+        echo "</form>";
 
     } else {
         echo "<h3 style='text-align:center; color:red;'>Empty shopping cart!</h3>";
     }
-    $conn->close(); // Close the database connection
+    $conn->close();
 } else {
     echo "<h3 style='text-align:center; color:red;'>Empty shopping cart!</h3>";
 }
 
-echo "</div>"; // End of the container
-
-include("footer.php"); // Include the Page Layout footer
+echo "</div>";
+include("footer.php");
 ?>
