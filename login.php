@@ -50,7 +50,7 @@ function togglePasswordVisibility() {
     <div class="col-sm-9 login-password-container">
         <input class="form-control" type="password" 
                name="password" id="password" required />
-        <i class="fa-regular fa-eye-slash" style="font-size: 18px; cursor: pointer" onclick="togglePasswordVisibility()"></i>         
+        <i class="fa-regular fa-eye-slash" style="font-size: 18px;" onclick="togglePasswordVisibility()"></i>         
     </div>
 </div>  
 <!-- 4th row - Login button --> 
