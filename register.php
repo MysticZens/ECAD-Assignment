@@ -42,6 +42,7 @@ function validateForm()
     return true;  // No error found
 }
 
+// Check if the eye icon has been clicked, then show the password
 function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password");
     var eyeIcon = document.querySelector(".fa-regular .fa-eye");

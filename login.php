@@ -5,16 +5,17 @@ session_start();
 include("header.php");
 ?>
 <script type="text/javascript">
-    function togglePasswordVisibility() {
-        var passwordInput = document.getElementById("password");        
-        var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+// Check if the eye icon has been clicked, then show the password
+function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password");        
+    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
 
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-        } else {
-            passwordInput.type = "password";
-        }
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
     }
+}
 </script>
 <!-- Create a cenrally located container -->
 <div style="width:50%; margin:auto">
