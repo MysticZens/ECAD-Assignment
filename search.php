@@ -228,7 +228,7 @@ else if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
 
 
 // OCCASION + PRICE RANGE
-if ((isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
+else if ((isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
     (isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
     (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")){
     // To Do (DIY): Retrieve list of product records with "ProductTitle" 
