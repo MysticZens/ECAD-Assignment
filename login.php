@@ -8,12 +8,17 @@ include("header.php");
 // Check if the eye icon has been clicked, then show the password
 function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password");        
-    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+    var eyeIcon = document.querySelector(".fa-eye-slash");
 
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
     } else {
+        var eyeIcon = document.querySelector(".fa-eye");
         passwordInput.type = "password";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
     }
 }
 </script>
@@ -45,7 +50,7 @@ function togglePasswordVisibility() {
     <div class="col-sm-9 login-password-container">
         <input class="form-control" type="password" 
                name="password" id="password" required />
-        <i class="fa-regular fa-eye" style="font-size: 18px" onclick="togglePasswordVisibility()"></i>         
+        <i class="fa-regular fa-eye-slash" style="font-size: 18px; cursor: pointer" onclick="togglePasswordVisibility()"></i>         
     </div>
 </div>  
 <!-- 4th row - Login button --> 

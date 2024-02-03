@@ -69,25 +69,33 @@ function authenticateForm()
 // Check if the eye icon has been clicked, then show the password
 function togglePasswordVisibility() {
     var passwordInput = document.getElementById("pwd1");
-    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+    var eyeIcon = document.getElementById("eye1");
 
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
-    
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
     } else {
+        var eyeIcon = document.querySelector(".fa-eye");
         passwordInput.type = "password";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
     }
 }
 
 function toggle2PasswordVisibility() {
     var password2Input = document.getElementById("pwd2");
-    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+    var eyeIcon = document.getElementById("eye2");
 
     if (password2Input.type === "password") {
         password2Input.type = "text";
-    
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
     } else {
+
         password2Input.type = "password";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
     }
 }
 </script>
@@ -151,7 +159,7 @@ function toggle2PasswordVisibility() {
         <div class="col-sm-9 password-container">
             <input class="form-control" name="pwd1" id="pwd1" 
                    type="password" maxlength="50" required />(required)   
-            <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="togglePasswordVisibility()"></i>
+            <i class="fa-regular fa-eye-slash required" id="eye1" style="font-size: 18px" onclick="togglePasswordVisibility()"></i>
         </div>
     </div>
     <!-- Form field for retyping new password -->
@@ -160,7 +168,7 @@ function toggle2PasswordVisibility() {
         <div class="col-sm-9 password-container">
             <input class="form-control" name="pwd2" id="pwd2"
                    type="password" maxlength="50" required />(required)
-            <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="toggle2PasswordVisibility()"></i>
+            <i class="fa-regular fa-eye-slash required" id="eye2" style="font-size: 18px" onclick="toggle2PasswordVisibility()"></i>
         </div>
     </div>
     <!-- Submission button for updating profile -->

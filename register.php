@@ -45,25 +45,32 @@ function validateForm()
 // Check if the eye icon has been clicked, then show the password
 function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password");
-    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+    var eyeIcon = document.getElementById("eye1");
 
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
-    
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
     } else {
+        var eyeIcon = document.querySelector(".fa-eye");
         passwordInput.type = "password";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
     }
 }
 
 function toggle2PasswordVisibility() {
     var password2Input = document.getElementById("password2");
-    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+    var eyeIcon = document.getElementById("eye2");
 
     if (password2Input.type === "password") {
         password2Input.type = "text";
-    
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
     } else {
         password2Input.type = "password";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
     }
 }
 </script>
@@ -126,7 +133,7 @@ function toggle2PasswordVisibility() {
             <label class="col-sm-3 col-form-label" for="password">Password:</label>
             <div class="col-sm-9 password-container">
                 <input class="form-control" name="password" id="password" type="password" maxlength="50" required /> (required)
-                <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="togglePasswordVisibility()"></i>
+                <i class="fa-regular fa-eye-slash required" style="font-size: 18px" id="eye1" onclick="togglePasswordVisibility()"></i>
             </div>
         </div>
         <!-- Retype Password -->
@@ -134,7 +141,7 @@ function toggle2PasswordVisibility() {
             <label class="col-sm-3 col-form-label" for="password2">Retype Password:</label>
             <div class="col-sm-9 password-container">
                 <input class="form-control" name="password2" id="password2" type="password" maxlength="50" required /> (required)
-                <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="toggle2PasswordVisibility()"></i>
+                <i class="fa-regular fa-eye-slash required" style="font-size: 18px" id="eye2" onclick="toggle2PasswordVisibility()"></i>
             </div>
         </div>
         <!-- Password Question -->

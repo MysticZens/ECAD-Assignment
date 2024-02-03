@@ -166,6 +166,15 @@ body {
   color: #666;
 }
 
+.fa-eye-slash {
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: auto; /* Ensure the cursor change on the eye icon */
+}
+
 .fa-eye {
   position: absolute;
   top: 50%;
