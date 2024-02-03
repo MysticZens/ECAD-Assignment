@@ -14,7 +14,7 @@ include("header.php"); // Include the Page Layout header
         </div> <!-- End of 1st row -->
 
         <div class="mb-3 row"> <!-- 2nd row -->
-            <label for="keywords" class="col-sm-3 col-form-label text-end">Product Title:</label>
+            <label for="keywords" class="col-sm-3 col-form-label text-end">Product Title/Description:</label>
             <div class="col-sm-6">
                 <input class="form-control" name="keywords" id="keywords" type="search" />
             </div>
