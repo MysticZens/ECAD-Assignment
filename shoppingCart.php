@@ -99,7 +99,11 @@ if (isset($_SESSION["Cart"])) {
         echo "<p style='text-align:right; font-size: 18px; width:94%'>Subtotal = S$" . number_format($subTotal, 2);
         $_SESSION["SubTotal"] = round($subTotal, 2);
 
+        $_SESSION["NormalShipCharge"] = 5.00; // default normal ship charge rate
+        $_SESSION["ExpressShipCharge"] = 10.00; // default express ship charge rate
+
         if ($_SESSION["SubTotal"] > 200) {
+            $_SESSION["ExpressShipCharge"] = 0;
             echo "<p style='text-align:right; font-size: 18px; width:94%; color:green;'>Congratulations! You qualify for free express delivery!</p>";
         }
 
@@ -108,14 +112,19 @@ if (isset($_SESSION["Cart"])) {
         echo "<div style='text-align:right; margin-right: 5.5%; width:94%'>";
         if ($_SESSION["SubTotal"] <= 200) {
             // Offer delivery mode choice only if subtotal is <= 200
+            $_SESSION["ExpressShipCharge"] = 10.00;
             echo "Choose Delivery Mode: ";
             echo "<select name='deliveryMode' id='deliveryMode'>";
-            echo "<option value='Normal'>Normal Delivery (within 2 working days)(\$5)</option>";
-            echo "<option value='Express'>Express Delivery(delivered within 24 hours) (\$10)</option>";
+            echo "<option value='Normal'>Normal Delivery (within 2 working days) (\$" . $_SESSION["NormalShipCharge"] . ")</option>";
+            echo "<option value='Express'>Express Delivery(delivered within 24 hours) (\$" . $_SESSION["ExpressShipCharge"] . ")</option>";
             echo "</select><br>";
+            echo "<br>";
         }
         // Hidden inputs to pass along the subtotal and any other required data
         echo "<input type='hidden' name='subtotal' value='" . $_SESSION["SubTotal"] . "'>";
+        echo "<p style='text-align:right; font-size: 18px; width:100%'> 
+		    Total Quantity = ". number_format($quantity);
+        echo "<br>";
         // PayPal checkout button
         echo "<input type='image' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'>";
         echo "</div>";
