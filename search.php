@@ -56,7 +56,6 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
     (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
     (isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
     (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")){
-    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
     $keywords = '%' . $_GET["keywords"] . '%';
     $result = $_GET["keywords"];
     $keywords1 = '%' . $_GET["keywords1"] . '%';
@@ -111,7 +110,7 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
         echo "<br />";
         echo "<span style = color:red>No products found.</span>";
     }
-	// To Do (DIY): End of Code
+
 }
 
 
@@ -119,7 +118,7 @@ if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
 else if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") & 
     (isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
     (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")){
-    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+
     $keywords = '%' . $_GET["keywords"] . '%';
     $result = $_GET["keywords"];
     $keywords2 = intval($_GET["keywords2"]);  // Convert to integer
@@ -167,14 +166,14 @@ else if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
         echo "<br />";
         echo "<span style = color:red>No products found.</span>";
     }
-	// To Do (DIY): End of Code
+
 }
 
 
 // PRODUCT TITLE/DESC + OCCASION
 else if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") & 
     (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "")){
-    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+
     $keywords = '%' . $_GET["keywords"] . '%';
     $result = $_GET["keywords"];
     $keywords1 = '%' . $_GET["keywords1"] . '%';
@@ -223,7 +222,7 @@ else if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
         echo "<br />";
         echo "<span style = color:red>No products found.</span>";
     }
-	// To Do (DIY): End of Code
+
 }
 
 
@@ -231,7 +230,7 @@ else if ((isset($_GET["keywords"]) && trim($_GET['keywords']) != "") &
 else if ((isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
     (isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
     (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")){
-    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+
     $keywords1 = '%' . $_GET["keywords1"] . '%';
     $result1 = $_GET["keywords1"];
     $keywords2 = intval($_GET["keywords2"]);  // Convert to integer
@@ -283,13 +282,13 @@ else if ((isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") &
         echo "<br />";
         echo "<span style = color:red>No products found.</span>";
     }
-	// To Do (DIY): End of Code
+
 }
 
 
 // PRODUCT TITLE / DESC ONLY
 else if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
-    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+
     $keywords = '%' . $_GET["keywords"] . '%';
     $result = $_GET["keywords"];
     echo "Search results for Product Title/Description <b>" . $result . "</b>: </br>";
@@ -330,7 +329,7 @@ else if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
 
 // OCCASION ONLY
 else if (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") {
-    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+
     $keywords1 = '%' . $_GET["keywords1"] . '%';
     $result1 = $_GET["keywords1"];
     echo "Search results for Occasion <b>" . $result1 . "</b>: </br>";
@@ -377,7 +376,7 @@ else if (isset($_GET["keywords1"]) && trim($_GET['keywords1']) != "") {
 // RANGE ONLY
 else if ((isset($_GET["keywords2"]) && trim($_GET['keywords2']) != "") &
         (isset($_GET["keywords3"]) && trim($_GET['keywords3']) != "")) {
-    // To Do (DIY): Retrieve list of product records with "ProductTitle" 
+
     $keywords2 = intval($_GET["keywords2"]);  // Convert to integer
     $result2 = $_GET["keywords2"];
     $keywords3 = intval($_GET["keywords3"]);  // Convert to integer
