@@ -112,7 +112,6 @@ if (isset($_SESSION["Cart"])) {
         echo "<div style='text-align:right; margin-right: 5.5%; width:94%'>";
         if ($_SESSION["SubTotal"] <= 200) {
             // Offer delivery mode choice only if subtotal is <= 200
-            $_SESSION["ExpressShipCharge"] = 10.00;
             echo "Choose Delivery Mode: ";
             echo "<select name='deliveryMode' id='deliveryMode'>";
             echo "<option value='Normal'>Normal Delivery (within 2 working days) (\$" . $_SESSION["NormalShipCharge"] . ")</option>";
