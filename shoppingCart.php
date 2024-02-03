@@ -1,11 +1,11 @@
 <?php
 // Include the code that contains shopping cart's functions.
-// Current session is detected in "cartFunctions.php, hence need not start session here.
+// Current session is detected in "cartFunctions.php", hence need not start session here.
 include_once("cartFunctions.php");
 include("header.php"); // Include the Page Layout header
 
 if (!isset($_SESSION["ShopperID"])) {
-    // Check if user logged in
+    // Check if the user is logged in
     // Redirect to the login page if the session variable shopperid is not set
     header("Location: login.php");
     exit;
@@ -46,7 +46,6 @@ if (isset($_SESSION["Cart"])) {
         $quantity = 0;
         echo "<tbody>"; // Start of the table's body section
         while ($row = $result->fetch_array()) {
-
             echo "<tr>";
             echo "<td style='width: 50%; background-color:#ffbebe' > $row[Name]<br />";
             echo "Product ID: $row[ProductID]</td>";
@@ -56,11 +55,13 @@ if (isset($_SESSION["Cart"])) {
             echo "<form action='cartFunctions.php' method='post'>";
             echo "<select name='quantity' onChange='this.form.submit()' style='background-color:#ffbebe; border:none'>";
             for ($i = 1; $i <= 10; $i++) { // To populate the drop-down list from 1 to 10
-                if ($i == $row["Quantity"])
+                if ($i == $row["Quantity"]) {
                     // Select the drop-down list item with a value the same as the quantity of purchase
                     $selected = "selected";
-                else
-                    $selected = ""; // No specific item is selected
+                } else {
+                    // No specific item is selected
+                    $selected = "";
+                }
                 echo "<option value='$i' $selected>$i</option>";
             }
             echo "</select>";
@@ -93,47 +94,45 @@ if (isset($_SESSION["Cart"])) {
         echo "</table>"; // End of the table
         echo "</div>"; // End of Bootstrap responsive table
 
-      // Display the subtotal at the end of the shopping cart
-echo "<br>";
-echo "<p style='text-align:right; font-size: 18px; width:94%'>Subtotal = S$" . number_format($subTotal, 2);
-$_SESSION["SubTotal"] = round($subTotal, 2);
+        // Display the subtotal at the end of the shopping cart
+        echo "<br>";
+        echo "<p style='text-align:right; font-size: 18px; width:94%'>Subtotal = S$" . number_format($subTotal, 2);
+        $_SESSION["SubTotal"] = round($subTotal, 2);
 
-if ($_SESSION["SubTotal"] > 200) {
-    // Waive the delivery charge for orders over S$200
-    $_SESSION["ShipCharge"] = $_SESSION["ExpressShipCharge"];
-}
-
-else {
-    // Calculate delivery charge based on the chosen delivery mode
-    if (isset($_POST['deliveryMode'])) {
-        $deliveryMode = $_POST['deliveryMode'];
-        if ($deliveryMode == 'Express') {
-            $_SESSION["ShipCharge"] = $_SESSION["ExpressShipCharge"];
+        if ($_SESSION["SubTotal"] > 200) {
+            // Waive the delivery charge for orders over S$200
+            $_SESSION["ShipCharge"] = 0;
+            echo "<p style='text-align:right; font-size: 18px; width:94%; color:green;'>Congratulations! You qualify for free express delivery!";
         } else {
-            $_SESSION["ShipCharge"] = $_SESSION["NormalShipCharge"];
+            // Calculate delivery charge based on the chosen delivery mode
+            if (isset($_POST['deliveryMode'])) {
+                $deliveryMode = $_POST['deliveryMode'];
+                if ($deliveryMode == 'Express') {
+                    $_SESSION["ShipCharge"] = $_SESSION["ExpressShipCharge"];
+                } else {
+                    $_SESSION["ShipCharge"] = $_SESSION["NormalShipCharge"];
+                }
+            }
+
+            // Allow the user to choose their preferred delivery mode
+            echo "<p style='text-align:right; font-size: 18px; width:94%'>Choose Delivery Mode:";
+            echo "<div style='text-align:right; margin-right: 5.5%; width:94%'>";
+            echo "<form method='post' action='checkoutProcess.php'>";
+            if ($_SESSION["SubTotal"] > 200) {
+                echo "<input type='hidden' name='deliveryMode' value='Express'>"; // Automatically select express delivery for them
+            } else {
+                // Display the dropdown for choosing delivery mode
+                echo "<select name='deliveryMode' id='deliveryMode'>";
+                echo "<option value='Normal'>Normal Delivery (\$5)</option>";
+                echo "<option value='Express'>Express Delivery (\$10)</option>";
+                echo "</select>";
+            }
+            echo "<input type='image' style='float:right; margin-right:5.5%' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'>";
+            echo "</form></div>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
         }
-    }
-}
-
-
-// Allow the user to choose their preferred delivery mode
-echo "<p style='text-align:right; font-size: 18px; width:94%'>Choose Delivery Mode:";
-echo "<div style='text-align:right; margin-right: 5.5%; width:94%'>";
-echo "<form method='post' action='checkoutProcess.php'>";
-if ($_SESSION["SubTotal"] > 200) {
-    echo "<input type='hidden' name='deliveryMode' value='Express'>"; // Automatically select express delivery for them
-} else {
-    // Display the dropdown for choosing delivery mode
-    echo "<select name='deliveryMode' id='deliveryMode'>";
-    echo "<option value='Normal'>Normal Delivery (\$5)</option>";
-    echo "<option value='Express'>Express Delivery (\$10)</option>";
-    echo "</select>";
-}
-echo "<input type='image' style='float:right; margin-right:5.5%' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'>";
-echo "</form></div>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
 
     } else {
         echo "<h3 style='text-align:center; color:red;'>Empty shopping cart!</h3>";
