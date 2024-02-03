@@ -31,11 +31,11 @@ include("header.php"); // Include the Page Layout header
             <div class="col-sm-3 col-form-label text-end">Price Range:</div>
             <div class="col-sm-3">
                 <label for="keywords3" class="visually-hidden">Min Price:</label>
-                <input class="form-control" name="keywords3" id="keywords3" type="number" placeholder="Min Price" />
+                <input min = "0" class="form-control" name="keywords3" id="keywords3" type="number" placeholder="Min Price" />
             </div>
             <div class="col-sm-3">
                 <label for="keywords2" class="visually-hidden">Max Price:</label>
-                <input class="form-control" name="keywords2" id="keywords2" type="number" placeholder="Max Price" />
+                <input min = "0" class="form-control" name="keywords2" id="keywords2" type="number" placeholder="Max Price" />
             </div>
         </div>
 
