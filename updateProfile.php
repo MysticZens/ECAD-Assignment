@@ -42,15 +42,15 @@ $stmt->close();
 function authenticateForm()
 {
     // Check if password matched
-	if (document.register.password.value != document.register.password2.value) { 
+	if (document.updateProfile.pwd1.value != document.updateProfile.pwd2.value) { 
         alert("Passwords not matched!");
         return false; // cancel submission
     }
 	// Check if telephone number entered correctly
 	// Singapore telephone number consists of 8 digits,
 	// start with 6, 8, or 9
-    if (document.register.phone.value != "") { 
-        var str = document.register.phone.value; 
+    if (document.updateProfile.telephone.value != "") { 
+        var str = document.updateProfile.telephone.value; 
         if (str.length != 8) {
             alert("Please enter an 8-digit phone number."); 
             return false; // cancel submission
@@ -63,8 +63,10 @@ function authenticateForm()
         }
         str = "(65)" + str;
     }
+    return true;
 }
 
+// Check if the eye icon has been clicked, then show the password
 function togglePasswordVisibility() {
     var passwordInput = document.getElementById("pwd1");
     var eyeIcon = document.querySelector(".fa-regular .fa-eye");

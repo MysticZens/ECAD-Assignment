@@ -41,7 +41,7 @@ include("header.php"); // Include the Page Layout header
 
         <div class="mb-3 row"> <!-- 5th row -->
             <div class="col-sm-12 text-center">
-                <button type="submit" class="btn btn-primary submitbutton">Search</button>
+                <button type="submit" class="submitbutton">Search</button>
             </div>
         </div> <!-- End of 5th row -->
     </form>
