@@ -50,7 +50,6 @@ body {
   color: #ffd700;
 }
 
-
 .rating .fa-star {
   cursor: pointer;
 }
@@ -78,7 +77,7 @@ body {
   transform: scale(1.1);
 }
 
-.sub-menu-wrap{
+.sub-menu-wrap {
   z-index: 2;
   width: 150px;
   position: absolute;
@@ -89,18 +88,18 @@ body {
   transition: max-height 0.5s;
 }
 /* Increases the max-height which will allow the dropdown menu to show itself */
-.sub-menu-wrap.open-menu{
+.sub-menu-wrap.open-menu {
   z-index: 4;
   max-height: 300px;
 }
 /* Giving the dropdown menu a backgroud color, padding and margin */
-.sub-menu{
+.sub-menu {
   background-color: rgba(4, 4, 58, 0.7);
   padding: 20px;
   margin: 10px;
 }
 /* Styling of links in the drop down menu */
-.sub-menu-link{
+.sub-menu-link {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -108,7 +107,7 @@ body {
   margin: 12px 0;
 }
 /* Giving width to the text in dropdown menu */
-.sub-menu-link p{
+.sub-menu-link p {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -116,7 +115,7 @@ body {
   transition: 0.3s;
 }
 /* Giving an animation of 5px difference when a mouse hovers over the text  */
-.sub-menu-link:hover p{
+.sub-menu-link:hover p {
   cursor: pointer;
   font-weight: bolder;
   color: yellow;
@@ -130,26 +129,34 @@ body {
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .card {
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 400px;
-  margin: 0 auto;
+  padding: 40px;
+  max-width: 50em;
+  margin: auto;
 }
 
 .card-body {
-  text-align: left;
+  text-align: center;
 }
 
 .card h3 {
