@@ -32,16 +32,16 @@ if ($_POST) // Post Data received from Shopping cart page.
     }
    // Calculate the delivery charge based on the chosen mode or waive it for orders over S$200
    if ($_SESSION["SubTotal"] > 200) {
-    $_SESSION["ShipCharge"] = 0; // Waive the delivery charge for orders over S$200
-} else {
+        $_SESSION["ShipCharge"] = $_SESSION["ExpressShipCharge"]; // Waive the delivery charge for orders over S$200
+    } else {
     // Ensure deliveryMode is part of the POST data from the form submission
-    if (isset($_POST['deliveryMode'])) {
-        $deliveryMode = $_POST['deliveryMode'];
-        if ($deliveryMode == 'Express') {
-            $_SESSION["ShipCharge"] = $_SESSION["ExpressShipCharge"]; // Could be $10, ensure this session variable is set correctly elsewhere
-        } else {
-            $_SESSION["ShipCharge"] = $_SESSION["NormalShipCharge"]; // Could be $5, ensure this session variable is set correctly elsewhere
-        }
+        if (isset($_POST['deliveryMode'])) {
+            $deliveryMode = $_POST['deliveryMode'];
+            if ($deliveryMode == 'Express') {
+                $_SESSION["ShipCharge"] = $_SESSION["ExpressShipCharge"]; // Could be $10, ensure this session variable is set correctly elsewhere
+            } else {
+                $_SESSION["ShipCharge"] = $_SESSION["NormalShipCharge"]; // Could be $5, ensure this session variable is set correctly elsewhere
+            }
     }
 }
 
