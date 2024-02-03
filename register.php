@@ -41,6 +41,31 @@ function validateForm()
     }
     return true;  // No error found
 }
+
+// Check if the eye icon has been clicked, then show the password
+function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password");
+    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    
+    } else {
+        passwordInput.type = "password";
+    }
+}
+
+function toggle2PasswordVisibility() {
+    var password2Input = document.getElementById("password2");
+    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+
+    if (password2Input.type === "password") {
+        password2Input.type = "text";
+    
+    } else {
+        password2Input.type = "password";
+    }
+}
 </script>
 
 <!-- This section contains the form for user registration -->
@@ -99,15 +124,17 @@ function validateForm()
         <!-- Password -->
         <div class="mb-3 row">
             <label class="col-sm-3 col-form-label" for="password">Password:</label>
-            <div class="col-sm-9">
+            <div class="col-sm-9 password-container">
                 <input class="form-control" name="password" id="password" type="password" maxlength="50" required /> (required)
+                <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="togglePasswordVisibility()"></i>
             </div>
         </div>
         <!-- Retype Password -->
         <div class="mb-3 row">
             <label class="col-sm-3 col-form-label" for="password2">Retype Password:</label>
-            <div class="col-sm-9">
+            <div class="col-sm-9 password-container">
                 <input class="form-control" name="password2" id="password2" type="password" maxlength="50" required /> (required)
+                <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="toggle2PasswordVisibility()"></i>
             </div>
         </div>
         <!-- Password Question -->

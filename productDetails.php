@@ -51,8 +51,10 @@ include("header.php"); // Include the Page Layout header
         echo "<p><img src='$img' style='width: 100%; max-width: 200px;' /></p>";
         echo "Price: ";
         if ($row["Quantity"] <= 0) {
+            echo "<button disabled style='background-color: red; color: white;'>Add to Cart</button><br>";
             echo "<b style='color:red;'>Out Of Stock</b>";
-        } else {
+        } 
+        else {
             if ($row["Offered"] == 1) {
                 $formattedPrice = number_format($row["Price"], 2);
                 $formattedPrice2 = number_format($row["OfferedPrice"], 2);
@@ -70,9 +72,10 @@ include("header.php"); // Include the Page Layout header
                     min='1' max='10' style='width: 40px' required />";
             echo "<button type='submit' ";
             if ($row["Quantity"] <= 0) {
-                echo "disabled style='background-color: red; color: white;'>Add to Cart</button>";
+                echo "<button disabled style='background-color: red; color: white;'>Add to Cart</button><br>";
+                echo "<b style='color:red;'>Out Of Stock</b>";
             } else {
-                echo "style='background-color: red; color: white;'>Add to Cart</button>";
+                echo "<button style='background-color: red; color: white;'>Add to Cart</button>";
             }
             echo "</form>";
         }

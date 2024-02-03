@@ -4,6 +4,19 @@ session_start();
 // Include the Page Layout header
 include("header.php");
 ?>
+<script type="text/javascript">
+// Check if the eye icon has been clicked, then show the password
+function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password");        
+    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+}
+</script>
 <!-- Create a cenrally located container -->
 <div style="width:50%; margin:auto">
 <!-- Create a HTML Form within the container -->
@@ -29,9 +42,10 @@ include("header.php");
     <label class="col-sm-3 col-form-label" for="password">
         Password:
     </label>
-    <div class="col-sm-9">
+    <div class="col-sm-9 login-password-container">
         <input class="form-control" type="password" 
                name="password" id="password" required />
+        <i class="fa-regular fa-eye" style="font-size: 18px" onclick="togglePasswordVisibility()"></i>         
     </div>
 </div>  
 <!-- 4th row - Login button --> 

@@ -44,6 +44,9 @@ include("header.php"); // Include the Page Layout header
             echo "Price: <span style='font-weight: bold; color: red; text-decoration: line-through;'>S$ $formattedPrice</span>";
             echo "<span style='font-weight: bold; color: red;'>&nbsp now <b>S$ $formattedPrice2</b></span>";
         }
+        if ($row["Quantity"] <= 0) {
+            echo "<span><b style='color:red;'>&nbsp(Out Of Stock)</b></span>";
+        }
         echo "</div>";
 
         // Right column display the product's image 
@@ -52,6 +55,7 @@ include("header.php"); // Include the Page Layout header
         echo "<img src='$img' style='width: 100%; max-width: 200px;' />";
         echo "</div>";
         echo "</div>"; // End of a row
+
     }
 
     $conn->close(); // Close the database connection
