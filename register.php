@@ -133,7 +133,7 @@ function toggle2PasswordVisibility() {
             <label class="col-sm-3 col-form-label" for="password2">Retype Password:</label>
             <div class="col-sm-9 password-container">
                 <input class="form-control" name="password2" id="password2" type="password" maxlength="50" required /> (required)
-                <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="togglePassword2Visibility()"></i>
+                <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="toggle2PasswordVisibility()"></i>
             </div>
         </div>
         <!-- Password Question -->

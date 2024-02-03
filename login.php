@@ -4,7 +4,7 @@ session_start();
 // Include the Page Layout header
 include("header.php");
 ?>
-<script>
+<script type="text/javascript">
     function togglePasswordVisibility() {
         var passwordInput = document.getElementById("password");        
         var eyeIcon = document.querySelector(".fa-regular .fa-eye");
