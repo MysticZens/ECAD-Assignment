@@ -64,6 +64,30 @@ function authenticateForm()
         str = "(65)" + str;
     }
 }
+
+function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("pwd1");
+    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    
+    } else {
+        passwordInput.type = "password";
+    }
+}
+
+function toggle2PasswordVisibility() {
+    var password2Input = document.getElementById("pwd2");
+    var eyeIcon = document.querySelector(".fa-regular .fa-eye");
+
+    if (password2Input.type === "password") {
+        password2Input.type = "text";
+    
+    } else {
+        password2Input.type = "password";
+    }
+}
 </script>
 <!-- Create a centrally located container -->
 <div style="width:50%; margin:auto;">
@@ -79,7 +103,7 @@ function authenticateForm()
         <label class="col-sm-3 col-form-label" for="username">Name:</label>
         <div class="col-sm-9">
             <input class="form-control" name="username" id="username" 
-                   type="text" maxlength="50" value="<?php echo $name; ?>" required />
+                   type="text" maxlength="50" value="<?php echo $name; ?>" required />(required)
         </div>
     </div>
     <!-- Form field for updating date of birth -->
@@ -116,23 +140,25 @@ function authenticateForm()
         <label class="col-sm-3 col-form-label" for="userEmail">Email Address:</label>
         <div class="col-sm-9">
             <input class="form-control" name="userEmail" id="userEmail" 
-                   type="email" maxlength="50" value="<?php echo $email; ?>" required /> 
+                   type="email" maxlength="50" value="<?php echo $email; ?>" required />(required)
         </div>
     </div>
     <!-- Form field for updating new password -->
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label" for="pwd1">New Password:</label>
-        <div class="col-sm-9">
+        <div class="col-sm-9 password-container">
             <input class="form-control" name="pwd1" id="pwd1" 
-                   type="password" maxlength="50" required />
+                   type="password" maxlength="50" required />(required)   
+            <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="togglePasswordVisibility()"></i>
         </div>
     </div>
     <!-- Form field for retyping new password -->
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label" for="pwd2">Retype Password:</label>
-        <div class="col-sm-9">
+        <div class="col-sm-9 password-container">
             <input class="form-control" name="pwd2" id="pwd2"
-                   type="password" maxlength="50" required />
+                   type="password" maxlength="50" required />(required)
+            <i class="fa-regular fa-eye required" style="font-size: 18px" onclick="toggle2PasswordVisibility()"></i>
         </div>
     </div>
     <!-- Submission button for updating profile -->
