@@ -110,8 +110,8 @@ if (isset($_SESSION["Cart"])) {
             // Offer delivery mode choice only if subtotal is <= 200
             echo "Choose Delivery Mode: ";
             echo "<select name='deliveryMode' id='deliveryMode'>";
-            echo "<option value='Normal'>Normal Delivery (\$5)</option>";
-            echo "<option value='Express'>Express Delivery (\$10)</option>";
+            echo "<option value='Normal'>Normal Delivery (within 2 working days)(\$5)</option>";
+            echo "<option value='Express'>Express Delivery(delivered within 24 hours) (\$10)</option>";
             echo "</select><br>";
         }
         // Hidden inputs to pass along the subtotal and any other required data
