@@ -1,13 +1,13 @@
 <?php
 $PayPalMode 		= 'sandbox'; // sandbox or live
-$PayPalApiUsername 	= 'sb-qy0fx28499457_api1.business.example.com'; 		//PayPal API Username
-$PayPalApiPassword 	= 'LJHEX9PWVPXNJ4F3'; 		//Paypal API password
+$PayPalApiUsername 	= 'sb-et77z26653805_api1.business.example.com'; 		//PayPal API Username
+$PayPalApiPassword 	= 'SUXL3K2L82SVNL88'; 		//Paypal API password
 $PayPalApiSignature = 'A9b3kG6U2Eg3SyAwpqlPRGzOdvUiAU07Mhwf0BrbYE52nM0J.btnJXpS'; 		//Paypal API Signature
 $PayPalCurrencyCode = 'SGD'; //Paypal Currency Code
 //URL to redirect to after PayPal has complete the online payment
-$PayPalReturnURL 	= 'http://localhost:8081/ECAD-Assignment/checkoutProcess.php'; 
+$PayPalReturnURL 	= 'http://localhost:8081/Giftown Singapore/checkoutProcess.php'; 
 //URL to redirect to if user clicks cancel                
-$PayPalCancelURL 	= 'http://localhost:8081/ECAD-Assignment/shoppingCart.php'; 
+$PayPalCancelURL 	= 'http://localhost:8081/Giftown Singapore/shoppingCart.php'; 
                 	
 function PPHttpPost($methodName_, $nvpStr_, $PayPalApiUsername, $PayPalApiPassword, 
                     $PayPalApiSignature, $PayPalMode) {
@@ -76,3 +76,4 @@ function PPHttpPost($methodName_, $nvpStr_, $PayPalApiUsername, $PayPalApiPasswo
 		
 	return $httpParsedResponseAr;
 }
+?>
