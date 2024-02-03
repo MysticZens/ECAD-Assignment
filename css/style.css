@@ -165,3 +165,33 @@ body {
 .card p {
   color: #666;
 }
+
+.fa-eye {
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: auto; /* Ensure the cursor change on the eye icon */
+}
+
+.required {
+  top: 30%;
+}
+
+.login-password-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.password-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+.password-input {
+  padding-right: 30px; /* Leave space for the eye icon */
+}
+
+.password2-input {
+  padding-right: 30px;
+}
