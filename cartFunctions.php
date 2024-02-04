@@ -70,7 +70,7 @@ function addItem() {
 		$result = $stmt1->get_result();
 		$row = $result->fetch_assoc();
 
-		if ($row == 0) {
+		if ($row["Offered"] == 0) {
 			$qry = "INSERT INTO shopcartitem (ShopCartID, ProductID, Price, Name, Quantity) 
 				SELECT ?, ?, Price, ProductTitle, ? FROM product WHERE ProductID=?";
 			$stmt = $conn->prepare($qry);
@@ -83,7 +83,7 @@ function addItem() {
 
 		else { //$row == 1
 			$qry = "INSERT INTO shopcartitem (ShopCartID, ProductID, Price, Name, Quantity) 
-				SELECT ?, ?, Price, ProductTitle, ? FROM product WHERE ProductID=?";
+				SELECT ?, ?, OfferedPrice, ProductTitle, ? FROM product WHERE ProductID=?";
 			$stmt = $conn->prepare($qry);
 			// "iiii" - 4 integers
 			$stmt->bind_param("iiii", $_SESSION["Cart"], $pid, $quantity, $pid);
