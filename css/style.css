@@ -204,3 +204,11 @@ body {
 .password2-input {
   padding-right: 30px;
 }
+
+.order-confirmation {
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  width: 80%;
+}

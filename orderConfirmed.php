@@ -3,10 +3,10 @@ include("header.php"); // Ensure this includes the necessary HTML structure
 include_once("mysql_conn.php"); // Make sure this contains the connection logic
 include_once("cartFunctions.php"); // Assumes this file contains relevant cart and order functions
 
+echo "<div class='order-confirmation card container text-center'>"; // Added for potential CSS styling
 // Check if checkout was successful and an OrderID is set
 if (isset($_SESSION['OrderID'])) {
-    echo "<div class='order-confirmation'>"; // Added for potential CSS styling
-    echo "<h2>Checkout Successful</h2>";
+    echo "<h2><b>Checkout Successful</b></h2>";
     echo "<p>Your order number is: <strong>" . $_SESSION['OrderID'] . "</strong>. Please keep this for your records.</p>";
     echo "<p>Thank you for your purchase.</p>";
 
@@ -46,6 +46,7 @@ if (isset($_SESSION['OrderID'])) {
     // Handle cases where the OrderID is not set, indicating checkout wasn't properly completed
     echo "<p>Order processing was not completed. Please try again or contact support if you need assistance.</p>";
 }
-
+echo "</div>";
+echo "<br />";
 include("footer.php"); // Ensure this includes the closing HTML structure
 ?>
