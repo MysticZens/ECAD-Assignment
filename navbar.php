@@ -1,3 +1,4 @@
+<!-- Done by Team 3 -->
 <?php 
 //Display guest welcome message, Login and Registration links
 //when shopper has yet to login,

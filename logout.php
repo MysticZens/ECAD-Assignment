@@ -1,3 +1,4 @@
+<!-- Done by Team 3 -->
 <?php
 session_start();
 // Destroy the session

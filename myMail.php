@@ -1,3 +1,5 @@
+<!-- Done by Qian Zhe -->
+<!-- Student ID: S10243009K -->
 <?php 
 //loading library required for PHPMailer
 require 'PHPMailer-master/PHPMailerAutoload.php'; 

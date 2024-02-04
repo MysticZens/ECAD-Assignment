@@ -1,3 +1,5 @@
+<!-- Done by Xavier -->
+<!-- Student ID: S10242016G -->
 <?php
 // Include the code that contains shopping cart's functions.
 // Current session is detected in "cartFunctions.php", hence need not start session here.

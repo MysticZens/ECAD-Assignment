@@ -1,3 +1,4 @@
+<!-- Done by Team 3 -->
 <?php 
 // Detect the current session
 session_start();
