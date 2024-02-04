@@ -1,5 +1,4 @@
 <?php
-session_start();
 include("header.php"); // Ensure this includes the necessary HTML structure
 include_once("mysql_conn.php"); // Make sure this contains the connection logic
 include_once("cartFunctions.php"); // Assumes this file contains relevant cart and order functions
