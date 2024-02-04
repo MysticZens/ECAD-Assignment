@@ -4,6 +4,10 @@ session_start();
 // Include the Page Layout header
 include("header.php"); 
 $currentDate = date('Y-m-d');
+if (isset($_SESSION["ShopperID"])) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 <script type="text/javascript">
 // Function to validate the registration form

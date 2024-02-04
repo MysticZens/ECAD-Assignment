@@ -3,7 +3,13 @@
 session_start();
 // Include the Page Layout header
 include("header.php");
+
+if (isset($_SESSION["ShopperID"])) {
+    header("Location: index.php");
+    exit();
+}
 ?>
+
 <script type="text/javascript">
 // Check if the eye icon has been clicked, then show the password
 function togglePasswordVisibility() {

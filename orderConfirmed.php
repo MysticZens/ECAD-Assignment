@@ -1,7 +1,7 @@
 <?php
+session_start();
 include("header.php"); // Ensure this includes the necessary HTML structure
 include_once("mysql_conn.php"); // Make sure this contains the connection logic
-include_once("cartFunctions.php"); // Assumes this file contains relevant cart and order functions
 
 echo "<div class='order-confirmation card container text-center'>"; // Added for potential CSS styling
 // Check if checkout was successful and an OrderID is set
@@ -43,7 +43,8 @@ if (isset($_SESSION['OrderID'])) {
     // Clear the cart session variables if the order is finalized
     unset($_SESSION['Items'], $_SESSION['SubTotal'], $_SESSION['OrderID'], $_SESSION['ShipCharge'], $_SESSION['Tax']);
 } else {
-    // Handle cases where the OrderID is not set, indicating checkout wasn't properly completed
+    // Handle cases where the OrderID is not set, indicating checkout wasn't properly completed.
+    echo $_SESSION["ShopperName"];
     echo "<p>Order processing was not completed. Please try again or contact support if you need assistance.</p>";
 }
 echo "</div>";

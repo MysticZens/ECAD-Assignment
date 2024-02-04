@@ -4,6 +4,12 @@ include_once("myPayPal.php"); // Include the file that contains PayPal settings
 include_once("mysql_conn.php"); 
 include_once("cartFunctions.php");
 
+// Redirect to login page if shopper is not logged in
+if (!isset($_SESSION["ShopperID"])) {
+    header("Location: login.php");
+    exit();
+}
+
 if ($_POST) // Post Data received from Shopping cart page.
 {
     // Check to ensure each product item saved in the associative
