@@ -4,6 +4,7 @@ session_start();
 // Include the Page Layout header
 include("header.php"); 
 $currentDate = date('Y-m-d');
+// Check if member has logged in already
 if (isset($_SESSION["ShopperID"])) {
     header("Location: index.php");
     exit();

@@ -1,6 +1,11 @@
 <?php 
 session_start(); // Start or resume the session
 include("header.php"); // Include the Page Layout header
+// Check if member has logged in already
+if (isset($_SESSION["ShopperID"])) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <!-- Create a centrally located container -->

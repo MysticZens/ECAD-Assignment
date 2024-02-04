@@ -3,6 +3,12 @@ session_start();
 include("header.php"); // Ensure this includes the necessary HTML structure
 include_once("mysql_conn.php"); // Make sure this contains the connection logic
 
+// Redirect to login page if shopper is not logged in
+if (!isset($_SESSION["ShopperID"])) {
+    header("Location: login.php");
+    exit();
+}
+
 echo "<div class='order-confirmation card container text-center'>"; // Added for potential CSS styling
 // Check if checkout was successful and an OrderID is set
 if (isset($_SESSION['OrderID'])) {
