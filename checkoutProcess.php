@@ -43,6 +43,18 @@ if ($_POST) // Post Data received from Shopping cart page.
                 $_SESSION["ShipCharge"] = $_SESSION["NormalShipCharge"]; // Could be $5, ensure this session variable is set correctly elsewhere
             }
     }
+    // Retrieve the latest GST rate
+    $qry = "SELECT TaxRate FROM GST ORDER BY EffectiveDate DESC LIMIT 1";
+    $stmt = $conn->prepare($qry);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+    $_SESSION["Tax"] = round($_SESSION["SubTotal"] * ($row["TaxRate"] / 100), 2);
+    } else {
+    $_SESSION["Tax"] = 0; // Default to 0 if GST rate not found
+    }
+    $stmt->close();
+
 }
 
     $paypal_data = '';
@@ -55,8 +67,6 @@ if ($_POST) // Post Data received from Shopping cart page.
         $paypal_data .= '&L_PAYMENTREQUEST_0_NUMBER' . $key . '=' . urlencode($item["productId"]);
     }
 
-    // Compute GST amount 7% for Singapore, round the figure to 2 decimal places 
-    $_SESSION["Tax"] = round($_SESSION["SubTotal"] * 0.07, 2);
 
     // Data to be sent to PayPal
     $padata = '&CURRENCYCODE=' . urlencode($PayPalCurrencyCode) .
